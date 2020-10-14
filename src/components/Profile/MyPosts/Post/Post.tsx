@@ -1,8 +1,11 @@
 import React from 'react';
 import classes from './Post.module.css'
 
+type PostPropsType = {
+    messages: string
+}
 
-export function Post() {
+export function Post(props: PostPropsType) {
     return (
         <div className={classes.post__wrapper}>
             <div className={classes.avatar}>
@@ -11,7 +14,7 @@ export function Post() {
                     alt=""/>
             </div>
             <div className={classes.post}>
-                post 1
+                {props.messages}
                 <div>like</div>
             </div>
 

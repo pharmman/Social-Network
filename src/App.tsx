@@ -3,6 +3,8 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
+import {Dialogs} from './components/Dialogs/Dialogs';
+import { Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -10,7 +12,10 @@ function App() {
       <Header/>
       <div className={'app-inner'}>
           <Navbar/>
-          <Profile/>
+          <div className={'app-inner-content'}>
+              <Route path={'/dialogs'} render={ () => <Dialogs/>}/>
+              <Route path={'/profile'} render={ () => <Profile/>}/>
+          </div>
       </div>
     </div>
   );

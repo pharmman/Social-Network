@@ -8,3 +8,8 @@
     display: flex;
     margin-top: 10px;
 }
+
+.app-inner-content {
+    background-color: #405898;
+    width: 1000px;
+}
