@@ -13,13 +13,13 @@ export function Navbar () {
                 <NavLink to={'/dialogs'} activeClassName={classes.active}>Messages</NavLink>
             </div>
             <div className={classes.navbar__item}>
-                <a>News</a>
+                <a href={'/dialogs'}>News</a>
             </div>
             <div className={classes.navbar__item}>
-                <a>Music</a>
+                <a href={'/dialogs'}>Music</a>
             </div>
             <div className={classes.navbar__item}>
-                <a>Settings</a>
+                <a href={'/dialogs'}>Settings</a>
             </div>
         </nav>
     )

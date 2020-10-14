@@ -12,7 +12,7 @@ type DialogPropsType = {
 export function Dialog(props: DialogPropsType) {
     return (
         <div className={classes.dialogName}>
-            <NavLink className={classes.name} activeClassName={classes.active} to={`./dialogs/${props.id}`}>{props.name}</NavLink>
+            <NavLink className={classes.name} activeClassName={classes.active} to={`/dialogs/${props.id}`}>{props.name}</NavLink>
         </div>
     )
 }
