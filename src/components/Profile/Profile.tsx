@@ -1,8 +1,13 @@
 import React from 'react';
 import classes from './Profile.module.css'
 import {MyPosts} from './MyPosts/MyPosts';
+import {PostsDataType} from '../../redux/state';
 
-export function Profile() {
+type ProfilePropsType = {
+    posts: Array<PostsDataType>
+}
+
+export function Profile(props:ProfilePropsType) {
     return (
         <div className={classes.profile}>
             <div className={classes.profile__img}>
@@ -12,7 +17,7 @@ export function Profile() {
             <div className={classes.description}>
                 img + descr
             </div>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }

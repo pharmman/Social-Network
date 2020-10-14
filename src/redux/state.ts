@@ -22,7 +22,7 @@ export type PostsDataType = {
 export type ProfilePageType = {
     posts: Array<PostsDataType>
 }
-type StateType = {
+export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }

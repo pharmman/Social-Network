@@ -3,6 +3,7 @@ import classes from './Post.module.css'
 
 type PostPropsType = {
     messages: string
+    likesCount: number
 }
 
 export function Post(props: PostPropsType) {
@@ -15,7 +16,10 @@ export function Post(props: PostPropsType) {
             </div>
             <div className={classes.post}>
                 {props.messages}
-                <div>like</div>
+                <button disabled={true}>like</button>
+            </div>
+            <div>
+                LikesCount: <span className={classes.likesCount}>{props.likesCount}</span>
             </div>
 
         </div>
