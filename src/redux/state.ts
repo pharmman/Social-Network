@@ -58,13 +58,14 @@ export let state:StateType = {
     }
 }
 
-export function addPost () {
-    const newPost:PostsDataType = {id: 5, message:state.profilePage.messageForNewPost, likesCount: 0};
-    state.profilePage.posts.push(newPost);
+export function changingValueForNewPost (value:string) {
+    state.profilePage.messageForNewPost = value;
     rerenderEntireTree(state)
 }
 
-export function changingValueForNewPost (value:string) {
-    state.profilePage.messageForNewPost = value;
+export function addPost () {
+    const newPost:PostsDataType = {id: 5, message:state.profilePage.messageForNewPost, likesCount: 0};
+    state.profilePage.posts.push(newPost);
+    changingValueForNewPost('');
     rerenderEntireTree(state)
 }

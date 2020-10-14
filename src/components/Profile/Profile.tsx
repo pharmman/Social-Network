@@ -5,6 +5,7 @@ import {PostsDataType} from '../../redux/state';
 
 type ProfilePropsType = {
     posts: Array<PostsDataType>
+    messageForNewPost: string
     addPost: () => void
     changingValueForNewPost: (value: string) => void
 }
@@ -19,7 +20,7 @@ export function Profile(props: ProfilePropsType) {
             <div className={classes.description}>
                 img + descr
             </div>
-            <MyPosts posts={props.posts} changingValueForNewPost={props.changingValueForNewPost} addPost={props.addPost}/>
+            <MyPosts messageForNewPost={props.messageForNewPost} posts={props.posts} changingValueForNewPost={props.changingValueForNewPost} addPost={props.addPost}/>
         </div>
     )
 }

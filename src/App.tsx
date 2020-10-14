@@ -22,7 +22,7 @@ function App(props: AppPropsType) {
                 <div className={'app-inner-content'}>
                     <Route path={'/dialogs'} render={() => <Dialogs message={props.appState.dialogsPage.messages}
                                                                     dialogs={props.appState.dialogsPage.dialogs}/>}/>
-                    <Route path={'/profile'} render={() => <Profile posts={props.appState.profilePage.posts} addPost={props.addPost} changingValueForNewPost={props.changingValueForNewPost}/>}/>
+                    <Route path={'/profile'} render={() => <Profile messageForNewPost={props.appState.profilePage.messageForNewPost} posts={props.appState.profilePage.posts} addPost={props.addPost} changingValueForNewPost={props.changingValueForNewPost}/>}/>
                 </div>
             </div>
         </div>
