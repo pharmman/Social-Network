@@ -18,7 +18,7 @@ function App(props:AppPropsType) {
       <div className={'app-inner'}>
           <Navbar/>
           <div className={'app-inner-content'}>
-              <Route path={'/dialogs'} render={ () => <Dialogs/>}/>
+              <Route path={'/dialogs'} render={ () => <Dialogs message={props.appState.dialogsPage.messages} dialogs={props.appState.dialogsPage.dialogs}/>}/>
               <Route path={'/profile'} render={ () => <Profile posts={props.appState.profilePage.posts}/>}/>
           </div>
       </div>

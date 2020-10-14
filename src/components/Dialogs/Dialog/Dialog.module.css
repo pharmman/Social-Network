@@ -1,6 +1,8 @@
 .dialogName {
-    margin:.9em 0 3em;
+    margin-top: 40px;
     font-size: 25px;
+    text-align: center;
+
 }
 
 .active {
@@ -9,4 +11,7 @@
 
 .name {
     color: blanchedalmond;
+    border: 2px solid darkblue;
+    border-radius: 50%;
+    padding: 10px;
 }
