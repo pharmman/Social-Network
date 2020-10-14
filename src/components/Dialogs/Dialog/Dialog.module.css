@@ -1,0 +1,12 @@
+.dialogName {
+    margin:.9em 0 3em;
+    font-size: 25px;
+}
+
+.active {
+    color: gold;
+}
+
+.name {
+    color: blanchedalmond;
+}
