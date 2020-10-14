@@ -5,9 +5,11 @@ import {PostsDataType} from '../../redux/state';
 
 type ProfilePropsType = {
     posts: Array<PostsDataType>
+    addPost: () => void
+    changingValueForNewPost: (value: string) => void
 }
 
-export function Profile(props:ProfilePropsType) {
+export function Profile(props: ProfilePropsType) {
     return (
         <div className={classes.profile}>
             <div className={classes.profile__img}>
@@ -17,7 +19,7 @@ export function Profile(props:ProfilePropsType) {
             <div className={classes.description}>
                 img + descr
             </div>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.posts} changingValueForNewPost={props.changingValueForNewPost} addPost={props.addPost}/>
         </div>
     )
 }
