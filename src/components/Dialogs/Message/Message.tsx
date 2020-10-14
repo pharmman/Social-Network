@@ -5,7 +5,7 @@ type MessagePropsType = {
     message: string
 }
 
-export function Message(props:MessagePropsType) {
+export function Message(props: MessagePropsType) {
     return (
         <div className={classes.speechBubble}>
             {props.message}

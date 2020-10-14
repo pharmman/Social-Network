@@ -7,14 +7,13 @@ import {BrowserRouter} from 'react-router-dom';
 import {addPost, changingValueForNewPost, StateType} from './redux/state';
 
 
-export let rerenderEntireTree = (state:StateType) => {
+export let rerenderEntireTree = (state: StateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <App appState={state} changingValueForNewPost={changingValueForNewPost} addPost={addPost}/>
-    </BrowserRouter>,document.getElementById('root')
-);
+        </BrowserRouter>, document.getElementById('root')
+    );
 }
-
 
 
 // If you want your app to work offline and load faster, you can change

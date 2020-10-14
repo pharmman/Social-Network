@@ -20,7 +20,8 @@ export function Profile(props: ProfilePropsType) {
             <div className={classes.description}>
                 img + descr
             </div>
-            <MyPosts messageForNewPost={props.messageForNewPost} posts={props.posts} changingValueForNewPost={props.changingValueForNewPost} addPost={props.addPost}/>
+            <MyPosts messageForNewPost={props.messageForNewPost} posts={props.posts}
+                     changingValueForNewPost={props.changingValueForNewPost} addPost={props.addPost}/>
         </div>
     )
 }

@@ -9,7 +9,7 @@ type DialogsPropsType = {
     message: Array<MessagesDataType>,
 }
 
-export function Dialogs (props:DialogsPropsType) {
+export function Dialogs(props: DialogsPropsType) {
     const dialogs = props.dialogs.map(d => {
         return <Dialog key={d.id} name={d.name} id={d.id}/>
     })
