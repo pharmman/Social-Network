@@ -1,0 +1,21 @@
+.profile {
+    background-color: #405898;
+    width: 1000px;
+
+}
+
+.profile__img {
+    display: flex;
+    justify-content: center;
+}
+
+
+.profile__img img {
+    height: 300px;
+    margin-top: 20px;
+}
+
+.description {
+    margin: 20px 0 0 20px;
+
+}
