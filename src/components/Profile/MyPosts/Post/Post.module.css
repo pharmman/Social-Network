@@ -1,0 +1,22 @@
+.avatar {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatar img {
+    width: auto;
+    height: 100%;
+    margin-left: -19px;
+}
+
+.post {
+    margin-top: 10px;
+    color: antiquewhite;
+}
+
+.post__wrapper {
+    margin-top: 20px;
+}
