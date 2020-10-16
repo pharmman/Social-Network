@@ -1,4 +1,7 @@
-import {rerenderEntireTree} from '../render';
+let rerenderEntireTree = () => {
+    console.log('State changed')
+}
+
 
 export type MessagesDataType = {
     id: number
@@ -60,12 +63,16 @@ export let state: StateType = {
 
 export function changingValueForNewPost(value: string) {
     state.profilePage.messageForNewPost = value;
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export function addPost() {
     const newPost: PostsDataType = {id: 5, message: state.profilePage.messageForNewPost, likesCount: 0};
     state.profilePage.posts.push(newPost);
     changingValueForNewPost('');
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+}
+
+export const subscribe = (observer:() => void) => {
+    rerenderEntireTree = observer
 }
