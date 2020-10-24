@@ -5,21 +5,20 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
-import {StateType} from './redux/state';
+import {StoreType} from './redux/state';
 
 type AppPropsType = {
-    appState: StateType
-    addPost: () => void
-    changingValueForNewPost: (value: string) => void
+    store: StoreType
 }
 
-function App(props: AppPropsType) {
-    const dialogs = () => <Dialogs message={props.appState.dialogsPage.messages}
-                                   dialogs={props.appState.dialogsPage.dialogs}/>
+const App: React.FC<AppPropsType> = (props) => {
+    const state = props.store.getState();
+    const dialogs = () => <Dialogs message={state.dialogsPage.messages}
+                                   dialogs={state.dialogsPage.dialogs}/>
 
-    const profile = () => <Profile messageForNewPost={props.appState.profilePage.messageForNewPost}
-                                   posts={props.appState.profilePage.posts} addPost={props.addPost}
-                                   changingValueForNewPost={props.changingValueForNewPost}/>
+    const profile = () => <Profile messageForNewPost={state.profilePage.messageForNewPost}
+                                   posts={state.profilePage.posts} addPost={props.store.addPost.bind(props.store)}
+                                   changingValueForNewPost={props.store.changingValueForNewPost.bind(props.store)}/>
     return (
         <div className={'app-wrapper'}>
             <Header/>

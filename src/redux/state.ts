@@ -1,8 +1,3 @@
-let rerenderEntireTree = () => {
-    console.log('State changed')
-}
-
-
 export type MessagesDataType = {
     id: number
     message: string
@@ -28,18 +23,23 @@ export type ProfilePageType = {
     posts: Array<PostsDataType>
     messageForNewPost: string
 }
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-type StoreType = {
+
+export type StoreType = {
     _state: StateType
-    changingValueForNewPost: (value:string) => void
+    changingValueForNewPost: (value: string) => void
+    _callSubscriber:() => void
+    getState: () => StateType
     addPost: () => void
+    subscribe: (observer: () => void) => void
 }
 
-const store:StoreType = {
-    _state:{
+export const store: StoreType = {
+    _state: {
         profilePage: {
             messageForNewPost: '',
             posts: [
@@ -66,18 +66,25 @@ const store:StoreType = {
             ]
         }
     },
-    changingValueForNewPost(value: string) {
+    _callSubscriber() {
+        console.log('State changed')
+    },
+    getState() {
+      return this._state
+    },
+    changingValueForNewPost(value) {
         this._state.profilePage.messageForNewPost = value;
-        rerenderEntireTree()
+        this._callSubscriber()
     },
     addPost() {
         const newPost: PostsDataType = {id: 5, message: this._state.profilePage.messageForNewPost, likesCount: 0};
         this._state.profilePage.posts.push(newPost);
         store.changingValueForNewPost('');
-        rerenderEntireTree()
+        this._callSubscriber()
+    },
+    subscribe(observer) {
+        this._callSubscriber = observer
     }
+
 }
 
-export const subscribe = (observer:() => void) => {
-    rerenderEntireTree = observer
-}
