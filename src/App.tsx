@@ -5,10 +5,11 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
-import {StoreType} from './redux/state';
+import {ActionsType, StoreType} from './redux/state';
 
 type AppPropsType = {
     store: StoreType
+    dispatch: (action: ActionsType) => void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -17,8 +18,7 @@ const App: React.FC<AppPropsType> = (props) => {
                                    dialogs={state.dialogsPage.dialogs}/>
 
     const profile = () => <Profile messageForNewPost={state.profilePage.messageForNewPost}
-                                   posts={state.profilePage.posts} addPost={props.store.addPost.bind(props.store)}
-                                   changingValueForNewPost={props.store.changingValueForNewPost.bind(props.store)}/>
+                                   posts={state.profilePage.posts} dispatch={props.dispatch}/>
     return (
         <div className={'app-wrapper'}>
             <Header/>

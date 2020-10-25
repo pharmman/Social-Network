@@ -1,3 +1,16 @@
+export const addPostActionCreator = ():AddPostActionType => {
+    return {
+        type: 'ADD-POST',
+    }
+};
+
+export const changingValueForNewPostActionCreator = (newValue: string):ChangingValueForNewPostType => {
+    return {
+        type: 'CHANGING-VALUE-FOR-NEW-POST',
+        value: newValue
+    }
+}
+
 export type MessagesDataType = {
     id: number
     message: string
@@ -24,6 +37,18 @@ export type ProfilePageType = {
     messageForNewPost: string
 }
 
+export type AddPostActionType = {
+    type: 'ADD-POST',
+}
+
+export type ChangingValueForNewPostType = {
+    type: 'CHANGING-VALUE-FOR-NEW-POST',
+    value: string
+}
+
+export type ActionsType = AddPostActionType | ChangingValueForNewPostType;
+
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -32,11 +57,13 @@ export type StateType = {
 export type StoreType = {
     _state: StateType
     changingValueForNewPost: (value: string) => void
-    _callSubscriber:() => void
+    _callSubscriber: () => void
     getState: () => StateType
+    dispatch:(action: ActionsType) => void
     addPost: () => void
     subscribe: (observer: () => void) => void
 }
+
 
 export const store: StoreType = {
     _state: {
@@ -70,7 +97,10 @@ export const store: StoreType = {
         console.log('State changed')
     },
     getState() {
-      return this._state
+        return this._state
+    },
+    subscribe(observer) {
+        this._callSubscriber = observer
     },
     changingValueForNewPost(value) {
         this._state.profilePage.messageForNewPost = value;
@@ -82,9 +112,19 @@ export const store: StoreType = {
         store.changingValueForNewPost('');
         this._callSubscriber()
     },
-    subscribe(observer) {
-        this._callSubscriber = observer
-    }
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsDataType = {id: 5, message: this._state.profilePage.messageForNewPost, likesCount: 0};
+            this._state.profilePage.posts.push(newPost);
+            store.changingValueForNewPost('');
+            this._callSubscriber()
+        } else if (action.type === 'CHANGING-VALUE-FOR-NEW-POST') {
+            this._state.profilePage.messageForNewPost = action.value;
+            this._callSubscriber()
+        }
 
+    }
 }
+
+
 
