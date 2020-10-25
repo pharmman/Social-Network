@@ -39,14 +39,9 @@ type ChangingValueForNewPostType = {
     value: string
 }
 
-type ChangeNewMessageBodyType = {
-    type: 'CHANGE-NEW-MESSAGE-BODY',
-    value: string
-}
+type ChangeNewMessageBodyType = ReturnType<typeof changeNewMessageBodyActionCreator>
 
-type AddNewMessageType = {
-    type: 'ADD-NEW-MESSAGE'
-}
+type AddNewMessageType = ReturnType<typeof addNewMessageActionCreator>
 
 export type ActionsType = AddPostActionType | ChangingValueForNewPostType | ChangeNewMessageBodyType | AddNewMessageType
 
@@ -130,15 +125,15 @@ export const changingValueForNewPostActionCreator = (newValue: string): Changing
     }
 };
 
-export const changeNewMessageBodyActionCreator = (newValue: string): ChangeNewMessageBodyType => {
+export const changeNewMessageBodyActionCreator = (newValue: string) => {
     return {
         type: 'CHANGE-NEW-MESSAGE-BODY',
         value: newValue
-    }
-};
+    } as const
+}
 
-export const addNewMessageActionCreator = ():AddNewMessageType => {
+export const addNewMessageActionCreator = () => {
     return {
         type: 'ADD-NEW-MESSAGE'
-    }
-};
+    } as const
+}
