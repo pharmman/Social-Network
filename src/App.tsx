@@ -15,7 +15,9 @@ type AppPropsType = {
 const App: React.FC<AppPropsType> = (props) => {
     const state = props.store.getState();
     const dialogs = () => <Dialogs message={state.dialogsPage.messages}
-                                   dialogs={state.dialogsPage.dialogs}/>
+                                   dialogs={state.dialogsPage.dialogs}
+                                   newMessageBody={state.dialogsPage.textForNewMessage}
+                                   dispatch={props.dispatch}/>
 
     const profile = () => <Profile messageForNewPost={state.profilePage.messageForNewPost}
                                    posts={state.profilePage.posts} dispatch={props.dispatch}/>

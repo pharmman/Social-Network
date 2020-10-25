@@ -9,6 +9,7 @@ export type DialogsDataType = {
 }
 
 export type DialogsPageType = {
+    textForNewMessage: string
     dialogs: Array<DialogsDataType>
     messages: Array<MessagesDataType>
 }
@@ -35,14 +36,23 @@ type AddPostActionType = {
 
 type ChangingValueForNewPostType = {
     type: 'CHANGING-VALUE-FOR-NEW-POST',
-    value:string
+    value: string
 }
 
-export type ActionsType = AddPostActionType | ChangingValueForNewPostType
+type ChangeNewMessageBodyType = {
+    type: 'CHANGE-NEW-MESSAGE-BODY',
+    value: string
+}
+
+type AddNewMessageType = {
+    type: 'ADD-NEW-MESSAGE'
+}
+
+export type ActionsType = AddPostActionType | ChangingValueForNewPostType | ChangeNewMessageBodyType | AddNewMessageType
 
 export type StoreType = {
     _state: StateType
-    _callSubscriber:() => void
+    _callSubscriber: () => void
     getState: () => StateType
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
@@ -60,6 +70,7 @@ export const store: StoreType = {
             ]
         },
         dialogsPage: {
+            textForNewMessage: '',
             dialogs: [
                 {id: 1, name: 'Steve'},
                 {id: 2, name: 'Tim'},
@@ -80,7 +91,7 @@ export const store: StoreType = {
         console.log('State changed')
     },
     getState() {
-      return this._state
+        return this._state
     },
     subscribe(observer) {
         this._callSubscriber = observer
@@ -94,19 +105,40 @@ export const store: StoreType = {
         } else if (action.type === 'CHANGING-VALUE-FOR-NEW-POST') {
             this._state.profilePage.messageForNewPost = action.value;
             this._callSubscriber()
+        } else if (action.type === 'CHANGE-NEW-MESSAGE-BODY') {
+            this._state.dialogsPage.textForNewMessage = action.value;
+            this._callSubscriber();
+        } else if (action.type === 'ADD-NEW-MESSAGE') {
+            const newMessage: MessagesDataType = {id: 6, message: this._state.dialogsPage.textForNewMessage};
+            this._state.dialogsPage.messages.push(newMessage);
+            this._state.dialogsPage.textForNewMessage = '';
+            this._callSubscriber();
         }
     }
 }
 
-export const addPostActionCreator = ():AddPostActionType => {
+export const addPostActionCreator = (): AddPostActionType => {
     return {
         type: 'ADD-POST'
     }
-}
+};
 
-export const changingValueForNewPostActionCreator = (newValue:string):ChangingValueForNewPostType => {
+export const changingValueForNewPostActionCreator = (newValue: string): ChangingValueForNewPostType => {
     return {
         type: 'CHANGING-VALUE-FOR-NEW-POST',
         value: newValue
     }
-}
+};
+
+export const changeNewMessageBodyActionCreator = (newValue: string): ChangeNewMessageBodyType => {
+    return {
+        type: 'CHANGE-NEW-MESSAGE-BODY',
+        value: newValue
+    }
+};
+
+export const addNewMessageActionCreator = ():AddNewMessageType => {
+    return {
+        type: 'ADD-NEW-MESSAGE'
+    }
+};

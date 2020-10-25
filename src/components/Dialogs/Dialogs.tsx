@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {Dialog} from './Dialog/Dialog';
 import {Message} from './Message/Message';
 import classes from './Dialogs.module.css'
-import {DialogsDataType, MessagesDataType} from '../../redux/state';
+import {
+    ActionsType,
+    addNewMessageActionCreator,
+    changeNewMessageBodyActionCreator,
+    DialogsDataType,
+    MessagesDataType
+} from '../../redux/state';
 
 type DialogsPropsType = {
-    dialogs: Array<DialogsDataType>,
-    message: Array<MessagesDataType>,
+    dialogs: Array<DialogsDataType>
+    message: Array<MessagesDataType>
+    newMessageBody: string
+    dispatch: (action: ActionsType) => void
 }
 
 export function Dialogs(props: DialogsPropsType) {
@@ -18,6 +26,14 @@ export function Dialogs(props: DialogsPropsType) {
         return <Message key={m.id} message={m.message}/>
     })
 
+    const changeNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(changeNewMessageBodyActionCreator(e.currentTarget.value))
+    }
+
+    const onClickSendMessageHandler = () => {
+        props.dispatch(addNewMessageActionCreator())
+    }
+
     return (
         <div className={classes.dialogs}>
             <div>
@@ -25,6 +41,11 @@ export function Dialogs(props: DialogsPropsType) {
             </div>
             <div>
                 {messages}
+                <div><textarea value={props.newMessageBody} onChange={changeNewMessageBody}
+                               placeholder={'Enter new message here'}/></div>
+                <div>
+                    <button onClick={onClickSendMessageHandler} className={classes.dialogs__button}>Send Message</button>
+                </div>
             </div>
         </div>
     )
