@@ -82,8 +82,8 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action) {
-        this._state = profileReducer(this._state, action)
-        this._state = dialogsReducer(this._state,action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
         this._callSubscriber()
     }
 }

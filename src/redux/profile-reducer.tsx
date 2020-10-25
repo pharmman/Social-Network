@@ -1,18 +1,17 @@
-import {ActionsType, PostsDataType, StateType} from './state';
+import {ActionsType, PostsDataType, ProfilePageType} from './state';
 
-export const profileReducer = (state: StateType, action: ActionsType) => {
+export const profileReducer = (profilePage: ProfilePageType, action: ActionsType) => {
     switch (action.type) {
         case 'ADD-POST':
-            const newPost: PostsDataType = {id: 5, message: state.profilePage.messageForNewPost, likesCount: 0};
-            state.profilePage.posts.push(newPost);
-            state.profilePage.messageForNewPost = '';
-            return state;
+            const newPost: PostsDataType = {id: 5, message: profilePage.messageForNewPost, likesCount: 0};
+            profilePage.posts.push(newPost);
+            profilePage.messageForNewPost = '';
+            return profilePage;
         case 'CHANGING-VALUE-FOR-NEW-POST':
-            debugger
-            state.profilePage.messageForNewPost = action.value;
-            return state;
+            profilePage.messageForNewPost = action.value;
+            return profilePage;
         default :
-            return state
+            return profilePage
     }
 }
 export type AddPostActionType = {

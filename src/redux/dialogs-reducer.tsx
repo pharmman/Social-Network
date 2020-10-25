@@ -1,17 +1,17 @@
-import {ActionsType, MessagesDataType, StateType} from './state';
+import {ActionsType, DialogsPageType, MessagesDataType} from './state';
 
-export const dialogsReducer = (state: StateType, action: ActionsType) => {
+export const dialogsReducer = (dialogsPage: DialogsPageType, action: ActionsType) => {
     switch (action.type){
         case 'CHANGE-NEW-MESSAGE-BODY':
-            state.dialogsPage.textForNewMessage = action.value;
-            return state;
-        case 'CHANGING-VALUE-FOR-NEW-POST':
-            const newMessage: MessagesDataType = {id: 6, message: state.dialogsPage.textForNewMessage};
-            state.dialogsPage.messages.push(newMessage);
-            state.dialogsPage.textForNewMessage = '';
-            return state;
+            dialogsPage.textForNewMessage = action.value;
+            return dialogsPage;
+        case 'ADD-NEW-MESSAGE':
+            const newMessage: MessagesDataType = {id: 6, message: dialogsPage.textForNewMessage};
+            dialogsPage.messages.push(newMessage);
+            dialogsPage.textForNewMessage = '';
+            return dialogsPage;
         default:
-            return state
+            return dialogsPage
     }
 }
 export type ChangeNewMessageBodyType = ReturnType<typeof changeNewMessageBodyActionCreator>
