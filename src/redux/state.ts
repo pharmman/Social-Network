@@ -29,13 +29,23 @@ export type StateType = {
     dialogsPage: DialogsPageType
 }
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+
+type ChangingValueForNewPostType = {
+    type: 'CHANGING-VALUE-FOR-NEW-POST',
+    value:string
+}
+
+export type ActionsType = AddPostActionType | ChangingValueForNewPostType
+
 export type StoreType = {
     _state: StateType
-    changingValueForNewPost: (value: string) => void
     _callSubscriber:() => void
     getState: () => StateType
-    addPost: () => void
     subscribe: (observer: () => void) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const store: StoreType = {
@@ -72,19 +82,31 @@ export const store: StoreType = {
     getState() {
       return this._state
     },
-    changingValueForNewPost(value) {
-        this._state.profilePage.messageForNewPost = value;
-        this._callSubscriber()
-    },
-    addPost() {
-        const newPost: PostsDataType = {id: 5, message: this._state.profilePage.messageForNewPost, likesCount: 0};
-        this._state.profilePage.posts.push(newPost);
-        store.changingValueForNewPost('');
-        this._callSubscriber()
-    },
     subscribe(observer) {
         this._callSubscriber = observer
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsDataType = {id: 5, message: this._state.profilePage.messageForNewPost, likesCount: 0};
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.messageForNewPost = '';
+            this._callSubscriber()
+        } else if (action.type === 'CHANGING-VALUE-FOR-NEW-POST') {
+            this._state.profilePage.messageForNewPost = action.value;
+            this._callSubscriber()
+        }
     }
-
 }
 
+export const addPostActionCreator = ():AddPostActionType => {
+    return {
+        type: 'ADD-POST'
+    }
+}
+
+export const changingValueForNewPostActionCreator = (newValue:string):ChangingValueForNewPostType => {
+    return {
+        type: 'CHANGING-VALUE-FOR-NEW-POST',
+        value: newValue
+    }
+}
