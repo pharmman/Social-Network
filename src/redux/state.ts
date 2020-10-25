@@ -1,3 +1,6 @@
+import {AddPostActionType, ChangingValueForNewPostType, profileReducer} from './profile-reducer';
+import {AddNewMessageType, ChangeNewMessageBodyType, dialogsReducer} from './dialogs-reducer';
+
 export type MessagesDataType = {
     id: number
     message: string
@@ -29,19 +32,6 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-
-type ChangingValueForNewPostType = {
-    type: 'CHANGING-VALUE-FOR-NEW-POST',
-    value: string
-}
-
-type ChangeNewMessageBodyType = ReturnType<typeof changeNewMessageBodyActionCreator>
-
-type AddNewMessageType = ReturnType<typeof addNewMessageActionCreator>
 
 export type ActionsType = AddPostActionType | ChangingValueForNewPostType | ChangeNewMessageBodyType | AddNewMessageType
 
@@ -92,48 +82,9 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostsDataType = {id: 5, message: this._state.profilePage.messageForNewPost, likesCount: 0};
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.messageForNewPost = '';
-            this._callSubscriber()
-        } else if (action.type === 'CHANGING-VALUE-FOR-NEW-POST') {
-            this._state.profilePage.messageForNewPost = action.value;
-            this._callSubscriber()
-        } else if (action.type === 'CHANGE-NEW-MESSAGE-BODY') {
-            this._state.dialogsPage.textForNewMessage = action.value;
-            this._callSubscriber();
-        } else if (action.type === 'ADD-NEW-MESSAGE') {
-            const newMessage: MessagesDataType = {id: 6, message: this._state.dialogsPage.textForNewMessage};
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.textForNewMessage = '';
-            this._callSubscriber();
-        }
+        this._state = profileReducer(this._state, action)
+        this._state = dialogsReducer(this._state,action)
+        this._callSubscriber()
     }
 }
 
-export const addPostActionCreator = (): AddPostActionType => {
-    return {
-        type: 'ADD-POST'
-    }
-};
-
-export const changingValueForNewPostActionCreator = (newValue: string): ChangingValueForNewPostType => {
-    return {
-        type: 'CHANGING-VALUE-FOR-NEW-POST',
-        value: newValue
-    }
-};
-
-export const changeNewMessageBodyActionCreator = (newValue: string) => {
-    return {
-        type: 'CHANGE-NEW-MESSAGE-BODY',
-        value: newValue
-    } as const
-}
-
-export const addNewMessageActionCreator = () => {
-    return {
-        type: 'ADD-NEW-MESSAGE'
-    } as const
-}
