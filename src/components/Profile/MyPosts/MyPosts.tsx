@@ -1,12 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import {Post} from './Post/Post';
-import {ActionsType,PostsDataType} from '../../../redux/store';
-import {addPostActionCreator, changingValueForNewPostActionCreator} from '../../../redux/profile-reducer';
+import {PostsDataType} from '../../../redux/store';
 
 type MyPostsPropsType = {
     posts: Array<PostsDataType>
     messageForNewPost: string
-    dispatch: (action: ActionsType) => void
+    addPost: () => void
+    onChange:(value:string) => void
 }
 
 export function MyPosts(props: MyPostsPropsType) {
@@ -17,12 +17,8 @@ export function MyPosts(props: MyPostsPropsType) {
         )
     })
 
-    const addPost = () => {
-        props.dispatch(addPostActionCreator())
-    }
-
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changingValueForNewPostActionCreator(e.currentTarget.value))
+        props.onChange(e.currentTarget.value)
     }
 
     return (
@@ -31,7 +27,7 @@ export function MyPosts(props: MyPostsPropsType) {
             <div>
                 <textarea value={props.messageForNewPost}
                           onChange={onChangeHandler}/>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={props.addPost}>Add post</button>
             </div>
             {posts}
         </div>

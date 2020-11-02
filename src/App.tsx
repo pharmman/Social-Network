@@ -20,8 +20,7 @@ const App: React.FC<AppPropsType> = (props) => {
                                    newMessageBody={state.dialogsPage.textForNewMessage}
                                    dispatch={props.dispatch}/>
 
-    const profile = () => <Profile messageForNewPost={state.profilePage.messageForNewPost}
-                                   posts={state.profilePage.posts} dispatch={props.dispatch}/>
+    const profile = () => <Profile dispatch={props.store.dispatch} state={state.profilePage}/>
     return (
         <div className={'app-wrapper'}>
             <Header/>
