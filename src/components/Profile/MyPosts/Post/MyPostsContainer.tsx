@@ -9,7 +9,7 @@ type MyPostsPropsType = {
     dispatch: (action: ActionsType) => void
 }
 
-export function ContainerMyPosts(props: MyPostsPropsType) {
+export function MyPostsContainer(props: MyPostsPropsType) {
 
     const addPost = () => {
         debugger
@@ -19,7 +19,6 @@ export function ContainerMyPosts(props: MyPostsPropsType) {
     const onChangeHandler = (value:string) => {
         props.dispatch(changingValueForNewPostActionCreator(value))
     }
-
 
     return (
         <div>

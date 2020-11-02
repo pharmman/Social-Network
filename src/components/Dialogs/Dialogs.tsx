@@ -2,14 +2,14 @@ import React, {ChangeEvent} from 'react';
 import {Dialog} from './Dialog/Dialog';
 import {Message} from './Message/Message';
 import classes from './Dialogs.module.css'
-import {ActionsType,DialogsDataType,MessagesDataType} from '../../redux/store';
-import {addNewMessageActionCreator, changeNewMessageBodyActionCreator} from '../../redux/dialogs-reducer';
+import {DialogsDataType, MessagesDataType} from '../../redux/store';
 
 type DialogsPropsType = {
     dialogs: Array<DialogsDataType>
     message: Array<MessagesDataType>
     newMessageBody: string
-    dispatch: (action: ActionsType) => void
+    changeNewMessageBody: (value:string) => void
+    onClickSendMessageHandler: () => void
 }
 
 export function Dialogs(props: DialogsPropsType) {
@@ -21,12 +21,12 @@ export function Dialogs(props: DialogsPropsType) {
         return <Message key={m.id} message={m.message}/>
     })
 
-    const changeNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeNewMessageBodyActionCreator(e.currentTarget.value))
+    const changeNewMessageBody = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        props.changeNewMessageBody(e.currentTarget.value)
     }
 
-    const onClickSendMessageHandler = () => {
-        props.dispatch(addNewMessageActionCreator())
+    const sendMessage = () => {
+        props.onClickSendMessageHandler()
     }
 
     return (
@@ -39,7 +39,7 @@ export function Dialogs(props: DialogsPropsType) {
                 <div><textarea value={props.newMessageBody} onChange={changeNewMessageBody}
                                placeholder={'Enter new message here'}/></div>
                 <div>
-                    <button onClick={onClickSendMessageHandler} className={classes.dialogs__button}>Send Message</button>
+                    <button onClick={sendMessage} className={classes.dialogs__button}>Send Message</button>
                 </div>
             </div>
         </div>

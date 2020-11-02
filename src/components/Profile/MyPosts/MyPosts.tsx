@@ -21,13 +21,17 @@ export function MyPosts(props: MyPostsPropsType) {
         props.onChange(e.currentTarget.value)
     }
 
+    const addPost = () => {
+        props.addPost()
+    }
+
     return (
         <div>
             My posts
             <div>
                 <textarea value={props.messageForNewPost}
                           onChange={onChangeHandler}/>
-                <button onClick={props.addPost}>Add post</button>
+                <button onClick={addPost}>Add post</button>
             </div>
             {posts}
         </div>

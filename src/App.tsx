@@ -3,10 +3,10 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
-import {Dialogs} from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
 import {ActionsType} from './redux/store';
 import {Store} from 'redux';
+import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
     store: Store
@@ -15,10 +15,7 @@ type AppPropsType = {
 
 const App: React.FC<AppPropsType> = (props) => {
     const state = props.store.getState();
-    const dialogs = () => <Dialogs message={state.dialogsPage.messages}
-                                   dialogs={state.dialogsPage.dialogs}
-                                   newMessageBody={state.dialogsPage.textForNewMessage}
-                                   dispatch={props.dispatch}/>
+    const dialogs = () => <DialogsContainer state={state.dialogsPage} dispatch={props.store.dispatch}/>
 
     const profile = () => <Profile dispatch={props.store.dispatch} state={state.profilePage}/>
     return (
