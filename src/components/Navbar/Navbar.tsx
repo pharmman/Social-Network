@@ -21,6 +21,9 @@ export function Navbar() {
             <div className={classes.navbar__item}>
                 <a href={'/dialogs'}>Settings</a>
             </div>
+            <div className={classes.navbar__item}>
+                <NavLink to={'/users'} activeClassName={classes.active}>Users</NavLink>
+            </div>
         </nav>
     )
 }

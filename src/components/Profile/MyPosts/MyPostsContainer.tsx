@@ -1,9 +1,8 @@
-import React from 'react';
 import {addPostActionCreator, changingValueForNewPostActionCreator} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {StateType} from '../../../redux/redux-store';
-import {ActionsType} from '../../../redux/store';
+import {ActionsType} from '../../../redux/Types';
 
 const mapStateToProps = (state: StateType) => {
     return {

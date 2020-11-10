@@ -1,9 +1,8 @@
-import React from 'react';
 import {addNewMessageActionCreator, changeNewMessageBodyActionCreator} from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
 import {StateType} from '../../redux/redux-store';
-import {ActionsType} from '../../redux/store';
 import {connect} from 'react-redux';
+import {ActionsType} from '../../redux/Types';
 
 const mapStateToProps = (state: StateType) => {
     return {

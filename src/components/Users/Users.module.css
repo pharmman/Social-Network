@@ -1,0 +1,40 @@
+.avatar {
+    width: 70px;
+    border-radius: 50%;
+}
+.wrapper {
+    display: flex;
+    max-width: 800px;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card__status {
+    font-size: 20px;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    color: black;
+    border: 1px;
+    border-radius: 0.4em;
+}
+
+.card__name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card__name_status {
+    font-size: 1.2em;
+}
+
+.card__location {
+    text-align: right;
+    padding-right: 5px;
+}
+
+.card__location_country {
+    padding-bottom: 5px;
+}
