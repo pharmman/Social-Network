@@ -1,25 +1,25 @@
-import {ActionsType, PostsDataType, ProfilePageType} from './store';
+import {ActionsType, ProfilePageType} from './store';
 
 const initialState = {
-        messageForNewPost: '',
-        posts: [
-            {id: 1, message: 'Hi, how are you?', likesCount: 12},
-            {id: 2, message: 'It\'s my first post', likesCount: 12},
-            {id: 3, message: 'Yo Yo Yo', likesCount: 12},
-            {id: 4, message: 'It\'s revolution Jhonny!', likesCount: 100500}
-        ]
+    messageForNewPost: '',
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 12},
+        {id: 2, message: 'It\'s my first post', likesCount: 12},
+        {id: 3, message: 'Yo Yo Yo', likesCount: 12},
+        {id: 4, message: 'It\'s revolution Jhonny!', likesCount: 100500}
+    ]
 }
 
 export const profileReducer = (profilePage: ProfilePageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case 'ADD-POST':
-            const newPost: PostsDataType = {id: 5, message: profilePage.messageForNewPost, likesCount: 0};
-            profilePage.posts.push(newPost);
-            profilePage.messageForNewPost = '';
-            return profilePage;
+            return {
+                ...profilePage,
+                posts: [...profilePage.posts, {id: 5, message: profilePage.messageForNewPost, likesCount: 0}],
+                messageForNewPost: ''
+            }
         case 'CHANGING-VALUE-FOR-NEW-POST':
-            profilePage.messageForNewPost = action.value;
-            return profilePage;
+            return {...profilePage, messageForNewPost: action.value}
         default :
             return profilePage
     }

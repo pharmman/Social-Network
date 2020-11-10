@@ -1,4 +1,4 @@
-import {ActionsType, DialogsPageType, MessagesDataType} from './store';
+import {ActionsType, DialogsPageType} from './store';
 
 const initialState = {
     textForNewMessage: '',
@@ -19,15 +19,19 @@ const initialState = {
 }
 
 export const dialogsReducer = (dialogsPage: DialogsPageType = initialState, action: ActionsType) => {
-    switch (action.type){
+    switch (action.type) {
         case 'CHANGE-NEW-MESSAGE-BODY':
-            dialogsPage.textForNewMessage = action.value;
-            return dialogsPage;
+            return {...dialogsPage, textForNewMessage: action.value}
         case 'ADD-NEW-MESSAGE':
-            const newMessage: MessagesDataType = {id: 6, message: dialogsPage.textForNewMessage};
-            dialogsPage.messages.push(newMessage);
-            dialogsPage.textForNewMessage = '';
-            return dialogsPage;
+            // const newMessage: MessagesDataType = {id: 6, message: dialogsPage.textForNewMessage};
+            // dialogsPage.messages.push(newMessage);
+            // dialogsPage.textForNewMessage = '';
+            // return dialogsPage;
+            return {
+                ...dialogsPage,
+                messages: [...dialogsPage.messages, {id: 6, message: dialogsPage.textForNewMessage}],
+                textForNewMessage: ''
+            }
         default:
             return dialogsPage
     }
