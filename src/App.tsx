@@ -8,18 +8,15 @@ import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 
 const App: React.FC = () => {
-    const dialogs = () => <DialogsContainer/>
-
-    const profile = () => <Profile/>
     return (
         <div className={'app-wrapper'}>
             <Header/>
             <div className={'app-inner'}>
                 <Navbar/>
                 <div className={'app-inner-content'}>
-                    <Route path={'/dialogs'} render={dialogs}/>
+                    <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
                     <Route path={'/profile'}
-                           render={profile}/>
+                           render={() => <Profile/>}/>
                 </div>
             </div>
         </div>
