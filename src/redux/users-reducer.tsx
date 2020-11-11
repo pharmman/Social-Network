@@ -23,7 +23,7 @@ const initialState:UsersPageType = {
 }
 
 
-export const usersReducer = (state = initialState, action: ActionsType) => {
+export const usersReducer = (state:UsersPageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case 'FOLLOW':
             return {
@@ -47,7 +47,8 @@ export const usersReducer = (state = initialState, action: ActionsType) => {
             }
         case 'SET-USERS':
             return {
-                ...state, users: action.users
+                ...state,
+                users: [...state.users, ...action.users]
             }
         default:
             return state
