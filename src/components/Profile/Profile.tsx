@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Profile.module.css'
-import {MyPostsContainer} from './MyPosts/Post/MyPostsContainer';
+import MyPostsContainer from './MyPosts/Post/MyPostsContainer';
 
 
 export function Profile() {
