@@ -1,5 +1,6 @@
 import {AddPostActionType, ChangingValueForNewPostType} from './profile-reducer';
 import {AddNewMessageType, ChangeNewMessageBodyType} from './dialogs-reducer';
+import {FollowType, SetUsers, UnfollowType} from './users-reducer';
 
 export type MessagesDataType = {
     id: number
@@ -33,7 +34,14 @@ export type ProfilePageType = {
 //     dialogsPage: DialogsPageType
 // }
 
-export type ActionsType = AddPostActionType | ChangingValueForNewPostType | ChangeNewMessageBodyType | AddNewMessageType
+export type ActionsType =
+    AddPostActionType
+    | ChangingValueForNewPostType
+    | ChangeNewMessageBodyType
+    | AddNewMessageType
+    | FollowType
+    | UnfollowType
+    | SetUsers
 
 // export type StoreType = {
 //     _state: StateType
