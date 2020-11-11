@@ -1,4 +1,4 @@
-import {ActionsType, PostsDataType, ProfilePageType} from './store';
+import {ActionsType, ProfilePageType} from './store';
 
 const initialState = {
         messageForNewPost: '',
@@ -10,18 +10,21 @@ const initialState = {
         ]
 }
 
-export const profileReducer = (profilePage: ProfilePageType = initialState, action: ActionsType) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case 'ADD-POST':
-            const newPost: PostsDataType = {id: 5, message: profilePage.messageForNewPost, likesCount: 0};
-            profilePage.posts.push(newPost);
-            profilePage.messageForNewPost = '';
-            return profilePage;
+            return {
+                ...state,
+                posts: [...state.posts, {id: 5, message: state.messageForNewPost, likesCount: 0}],
+                messageForNewPost: ''
+            }
         case 'CHANGING-VALUE-FOR-NEW-POST':
-            profilePage.messageForNewPost = action.value;
-            return profilePage;
+            return {
+                ...state,
+                messageForNewPost: action.value
+            }
         default :
-            return profilePage
+            return state
     }
 }
 export type AddPostActionType = {
