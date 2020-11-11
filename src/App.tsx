@@ -5,6 +5,7 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Route} from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 
 const App: React.FC = () => {
@@ -20,6 +21,8 @@ const App: React.FC = () => {
                     <Route path={'/dialogs'} render={dialogs}/>
                     <Route path={'/profile'}
                            render={profile}/>
+                    <Route path={'/users'}
+                           render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </div>
