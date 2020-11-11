@@ -9,7 +9,7 @@ const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer
-});
+} as const);
 
 
 export const store:Store = createStore(reducers)

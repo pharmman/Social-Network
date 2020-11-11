@@ -18,7 +18,7 @@ type LocationUser = {
     city: string
 }
 
-const initialState = {
+const initialState:UsersPageType = {
     users:[
         {
         id: 1,
@@ -71,6 +71,8 @@ export const usersReducer = (state = initialState, action: ActionsType) => {
             return {
                 ...state, users: action.users
             }
+        default:
+            return state
     }
 }
 
