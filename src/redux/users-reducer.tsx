@@ -19,29 +19,7 @@ type LocationUser = {
 }
 
 const initialState:UsersPageType = {
-    users:[
-        {
-        id: 1,
-        avatarUrl: 'https://pbs.twimg.com/profile_images/662619599578398720/Zmr9Zdp3_400x400.jpg',
-        followed: true, name: 'Tim C.', status: 'I\'m a genius of marketing', location: {country: 'USA', city: 'LA'},
-    },
-        {
-            id: 2,
-            avatarUrl: 'https://pbs.twimg.com/profile_images/662619599578398720/Zmr9Zdp3_400x400.jpg',
-            followed: true,
-            name: 'Jhonny I.',
-            status: 'I\'m a genius of design',
-            location: {country: 'Great Britan', city: 'London'},
-        },
-        {
-            id: 3,
-            avatarUrl: 'https://pbs.twimg.com/profile_images/662619599578398720/Zmr9Zdp3_400x400.jpg',
-            followed: false,
-            name: 'Valya',
-            status: 'I\'m a genius of nothing',
-            location: {country: 'Russia', city: 'Moscow'},
-        }
-    ]
+    users:[]
 }
 
 
