@@ -23,7 +23,7 @@ const initialState:UsersPageType = {
 }
 
 
-export const usersReducer = (state:UsersPageType = initialState, action: ActionsType) => {
+export const usersReducer = (state:UsersPageType = initialState, action: ActionsType):UsersPageType => {
     switch (action.type) {
         case 'FOLLOW':
             return {
