@@ -11,11 +11,17 @@ type UserPropsType = {
     setUsers: (users: Array<UserType>) => void
 }
 
+type ResponseType = {
+    items: UserType[]
+    totalCount: string
+    error: string | null
+}
+
 export const Users = (props: UserPropsType) => {
 
     const getUsers = () => {
         if (props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
+            axios.get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
                 debugger
                 props.setUsers(response.data.items)
             })

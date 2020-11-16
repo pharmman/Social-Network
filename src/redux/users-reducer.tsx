@@ -6,17 +6,15 @@ export type UsersPageType = {
 
 export type UserType = {
     id: number
-    avatarUrl: string
-    followed: boolean
     name: string
-    status: string
-    location: LocationUser
+    status: string | null
+    photos: {
+        small: string | null
+        large: string | null
+    }
+    followed: boolean
 }
 
-type LocationUser = {
-    country: string
-    city: string
-}
 
 const initialState:UsersPageType = {
     users:[]
