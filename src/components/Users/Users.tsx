@@ -1,6 +1,7 @@
 import React from 'react';
 import {UserType} from '../../redux/users-reducer';
 import classes from './Users.module.css'
+import  axios from 'axios'
 
 
 type UserPropsType = {
@@ -11,38 +12,25 @@ type UserPropsType = {
 }
 
 export const Users = (props: UserPropsType) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                avatarUrl: 'https://pbs.twimg.com/profile_images/662619599578398720/Zmr9Zdp3_400x400.jpg',
-                followed: true, name: 'Tim C.', status: 'I\'m a genius of marketing', location: {country: 'USA', city: 'LA'},
-            },
-            {
-                id: 2,
-                avatarUrl: 'https://pbs.twimg.com/profile_images/662619599578398720/Zmr9Zdp3_400x400.jpg',
-                followed: true,
-                name: 'Jhonny I.',
-                status: 'I\'m a genius of design',
-                location: {country: 'Great Britan', city: 'London'},
-            },
-            {
-                id: 3,
-                avatarUrl: 'https://pbs.twimg.com/profile_images/662619599578398720/Zmr9Zdp3_400x400.jpg',
-                followed: false,
-                name: 'Valya',
-                status: 'I\'m a genius of nothing',
-                location: {country: 'Russia', city: 'Moscow'},
-            }
-        ])
+
+    const getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
+                debugger
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
 
     return <>
+        {props.users.length === 0? <div className={classes.users__btn}>
+            <button  onClick={getUsers}>Get Users</button>
+        </div> : ''}
         {props.users.map(u => <div key={u.id}>
                 <div className={classes.wrapper}>
-                    <div>
-                        <img alt={'Avatar'} className={classes.avatar} src={u.avatarUrl}/>
+                    <div className={classes.avatar__wrapper}>
+                        <img alt={'Avatar'} className={classes.avatar} src={'https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_client_male_person_user_work_sport_beard_team_glasses-512.png'}/>
                         <div>
                             {u.followed ? <button onClick={() => props.unFollow(u.id)}>Unfollowed</button> :
                                 <button onClick={() => props.follow(u.id)}>Follow</button>}
@@ -54,8 +42,8 @@ export const Users = (props: UserPropsType) => {
                             <div className={classes.card__name_status}>{u.status}</div>
                         </div>
                         <div className={classes.card__location}>
-                            <div className={classes.card__location_country}>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div className={classes.card__location_country}>u.location.country</div>
+                            <div>u.location.city</div>
                         </div>
                     </div>
                 </div>

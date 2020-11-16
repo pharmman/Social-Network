@@ -1,7 +1,25 @@
+.users__btn {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.users__btn button  {
+    height: 100px;
+    width: 300px;
+}
+
 .avatar {
-    width: 70px;
+    width: 130px;
     border-radius: 50%;
 }
+
+.avatar__wrapper {
+    text-align: center;
+}
+
 .wrapper {
     display: flex;
     max-width: 800px;
