@@ -2,21 +2,29 @@ import {addPostActionCreator, changingValueForNewPostActionCreator} from '../../
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {StateType} from '../../../redux/redux-store';
-import {ActionsType, ProfilePageType} from '../../../redux/store';
+import {ActionsType, PostsDataType} from '../../../redux/store';
 import {Dispatch} from 'redux';
 
-export type MyPostsPropsType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
+type MapStateToPropsType = {
+    messageForNewPost: string
+    posts: PostsDataType[]
+}
 
-
-const mapStateToProps = (state:StateType):ProfilePageType => {
+const mapStateToProps = (state:StateType):MapStateToPropsType => {
     return {
         messageForNewPost: state.profilePage.messageForNewPost,
         posts: state.profilePage.posts
     }
 }
 
-const mapDispatchToProps = (dispatch:Dispatch<ActionsType>) => {
+type MapDispatchToPropsType = {
+    addPost: () => void
+    newPostBody: (value:string) => void
+}
+
+const mapDispatchToProps = (dispatch:Dispatch<ActionsType>):MapDispatchToPropsType => {
     return {
         addPost: () => dispatch(addPostActionCreator()),
         newPostBody: (value: string) => dispatch(changingValueForNewPostActionCreator(value))
@@ -24,5 +32,5 @@ const mapDispatchToProps = (dispatch:Dispatch<ActionsType>) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+export default connect<MapStateToPropsType,MapDispatchToPropsType,{}, StateType>(mapStateToProps, mapDispatchToProps)(MyPosts)
 

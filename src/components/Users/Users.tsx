@@ -4,6 +4,7 @@ import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.jpg'
 import axios from 'axios';
 import {UsersPropsType} from './UsersContainer';
+import {StateType} from '../../redux/redux-store';
 
 type ResponseType = {
     items: UserType[]
@@ -11,14 +12,12 @@ type ResponseType = {
     error: string | null
 }
 
-export class Users extends React.Component<UsersPropsType> {
-    constructor(props: UsersPropsType) {
-        super(props);
+export class Users extends React.Component<UsersPropsType, StateType> {
+    componentDidMount():void {
         axios.get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
             debugger
             this.props.setUsers(response.data.items)
         })
-
     }
 
     render() {
