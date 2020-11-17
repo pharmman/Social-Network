@@ -16,7 +16,7 @@ export type UserType = {
 }
 
 
-const initialState:UsersPageType = {
+const initialState = {
     users:[]
 }
 
