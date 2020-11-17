@@ -3,14 +3,7 @@ import {UserType} from '../../redux/users-reducer';
 import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.jpg'
 import axios from 'axios';
-
-
-type UserPropsType = {
-    users: Array<UserType>
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    setUsers: (users: Array<UserType>) => void
-}
+import {UsersPropsType} from './UsersContainer';
 
 type ResponseType = {
     items: UserType[]
@@ -18,8 +11,8 @@ type ResponseType = {
     error: string | null
 }
 
-export class Users extends React.Component<UserPropsType> {
-    constructor(props: UserPropsType) {
+export class Users extends React.Component<UsersPropsType> {
+    constructor(props: UsersPropsType) {
         super(props);
         axios.get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
             debugger

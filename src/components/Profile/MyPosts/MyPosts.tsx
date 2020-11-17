@@ -1,13 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {Post} from './Post/Post';
-import {PostsDataType} from '../../../redux/store';
+import {MyPostsPropsType} from './MyPostsContainer';
 
-type MyPostsPropsType = {
-    posts: Array<PostsDataType>
-    messageForNewPost: string
-    addPost: () => void
-    newPostBody:(value:string) => void
-}
 
 export function MyPosts(props: MyPostsPropsType) {
 

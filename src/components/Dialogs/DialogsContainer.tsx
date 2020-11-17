@@ -2,14 +2,17 @@ import {addNewMessageActionCreator, changeNewMessageBodyActionCreator} from '../
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
-import {ActionsType} from '../../redux/store';
+import {ActionsType, DialogsPageType} from '../../redux/store';
 import {Dispatch} from 'redux';
 
-const mapStateToProps = (state:StateType) => {
+export type DialogsPropsType = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
+
+
+const mapStateToProps = (state:StateType):DialogsPageType => {
     return {
         dialogs: state.dialogsPage.dialogs,
-        message:state.dialogsPage.messages,
-        newMessageBody: state.dialogsPage.textForNewMessage
+        messages:state.dialogsPage.messages,
+        textForNewMessage: state.dialogsPage.textForNewMessage
     }
 }
 
