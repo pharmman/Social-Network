@@ -13,15 +13,39 @@ type ResponseType = {
 }
 
 export class Users extends React.Component<UsersPropsType, StateType> {
-    componentDidMount():void {
-        axios.get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
-            debugger
+    componentDidMount(): void {
+        axios.get<ResponseType>
+        (`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+            .then(response => {
+                this.props.setTotalUsersCount(+response.data.totalCount)
             this.props.setUsers(response.data.items)
         })
     }
 
+    onPageChanged = (pageNumber:number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get<ResponseType>
+        (`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
+            .then(response => {
+                this.props.setTotalUsersCount(+response.data.totalCount)
+                this.props.setUsers(response.data.items)
+            })
+    }
+
     render() {
+
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        const pages = [];
+        for (let i = 1; i < pagesCount; i++) {
+            pages.push(i)
+        }
+
         return <>
+            <div className={classes.pageNumbers}>
+                {pages.map((p, index) => {
+                    return <span onClick={() => {this.onPageChanged(p)}} className={this.props.currentPage === p? classes.currentPage : ''} style={{margin: '2px'}} key={index}>{p}</span>
+                })}
+            </div>
             {this.props.users.map(u => <div key={u.id}>
                     <div className={classes.wrapper}>
                         <div className={classes.avatar__wrapper}>

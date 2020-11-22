@@ -56,3 +56,14 @@
 .card__location_country {
     padding-bottom: 5px;
 }
+
+.pageNumbers {
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.currentPage {
+    font-weight: bold;
+    font-size: 1.2em;
+}
