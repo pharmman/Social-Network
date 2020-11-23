@@ -1,10 +1,11 @@
 import {ActionsType} from './store';
 
 export type UsersPageType = {
-    users: Array<UserType>,
+    users: Array<UserType>
     pageSize: number
-    totalUsersCount: number,
+    totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type UserType = {
@@ -23,7 +24,8 @@ const initialState = {
     users: [],
     totalUsersCount: 0,
     currentPage: 2,
-    pageSize: 100
+    pageSize: 100,
+    isFetching: false
 }
 
 
@@ -55,7 +57,6 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
                 users: [...action.users]
             }
         case 'SET-CURRENT-PAGE':
-            debugger
             return {
                 ...state,
                 currentPage: action.page
@@ -64,6 +65,11 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
             return {
                 ...state,
                 totalUsersCount: action.count
+            }
+        case 'CHANGE-FETCHING-STATUS':
+            return {
+                ...state,
+                isFetching: action.fetching
             }
         default:
             return state
@@ -75,6 +81,7 @@ export type UnfollowType = ReturnType<typeof unFollowAC>
 export type SetUsersType = ReturnType<typeof setUsersAC>
 export type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>
 export type SetTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
+export type ChangeFetchingStatusType = ReturnType<typeof changeFetchingStatusAC>
 
 
 export const followAC = (userId: number) => {
@@ -109,5 +116,12 @@ export const setTotalUsersCountAC = (count:number) => {
     return{
         type: 'SET-TOTAL-USERS-COUNT',
         count
+    } as const
+}
+
+export const changeFetchingStatusAC = (fetching:boolean) => {
+    return {
+        type: 'CHANGE-FETCHING-STATUS',
+        fetching
     } as const
 }

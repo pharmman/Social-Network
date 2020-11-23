@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.users__btn button  {
+.users__btn button {
     height: 100px;
     width: 300px;
 }
@@ -67,3 +67,5 @@
     font-weight: bold;
     font-size: 1.2em;
 }
+
+
