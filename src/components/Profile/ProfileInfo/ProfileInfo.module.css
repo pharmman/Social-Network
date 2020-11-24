@@ -1,7 +1,6 @@
 
 .profile__img {
-    display: flex;
-    justify-content: flex-start;
+    display: block;
 }
 
 
@@ -17,4 +16,9 @@
 .description {
     margin: 0 0 40px 0;
 }
+
+.profile__imgLogo {
+    text-align: center;
+}
+
 

@@ -16,9 +16,15 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
     return (
         <div className={classes.profile}>
             <div className={classes.profile__img}>
+                <div className={classes.profile__imgLogo}>
+                    <img src="https://www.ixbt.com/img/n1/news/2019/7/5/dims_3_large.jpg"
+                         alt=""/>
+                </div>
+                <div>
                 {props.profile?.photos.large ? <img src={props.profile?.photos.large}
                                                     alt=""/> :
                     <img src={'https://i.ytimg.com/vi/bGObTk05_dQ/maxresdefault.jpg'} alt={''}/>}
+            </div>
             </div>
             <div className={classes.description}>
                 <h4>About me: {props.profile?.aboutMe}</h4>
@@ -32,7 +38,6 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
         </div>
     )
 }
-
 
 
 export const Contacts = (props: ProfileInfoPropsType) => {
