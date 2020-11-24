@@ -1,10 +1,7 @@
-.profile {
-
-}
 
 .profile__img {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 
@@ -13,7 +10,11 @@
     margin-top: 20px;
 }
 
-.description {
-    margin: 20px 0 0 20px;
-
+.description *{
+    margin: 5px;
 }
+
+.description {
+    margin: 0 0 40px 0;
+}
+

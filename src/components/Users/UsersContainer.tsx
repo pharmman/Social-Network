@@ -38,7 +38,7 @@ type MapStateToPropsType = {
 
 type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export class UsersContainer extends React.Component<UsersContainerPropsType, StateType> {
+class UsersContainer extends React.Component<UsersContainerPropsType, StateType> {
     componentDidMount(): void {
         this.props.changeFetchingStatus(true)
         axios.get<ResponseType>

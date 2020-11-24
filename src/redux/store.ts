@@ -1,4 +1,4 @@
-import {AddPostActionType, ChangingValueForNewPostType} from './profile-reducer';
+import {AddPostActionType, ChangingValueForNewPostType, ProfileType, SetProfileType} from './profile-reducer';
 import {AddNewMessageType, ChangeNewMessageBodyType} from './dialogs-reducer';
 import {
     ChangeFetchingStatusType,
@@ -32,6 +32,7 @@ export type PostsDataType = {
 }
 
 export type ProfilePageType = {
+    profile: null | ProfileType
     posts: Array<PostsDataType>
     messageForNewPost: string
 }
@@ -52,6 +53,7 @@ export type ActionsType =
     | SetCurrentPageType
     | SetTotalUsersCountType
     | ChangeFetchingStatusType
+    | SetProfileType
 
 // export type StoreType = {
 //     _state: StateType
