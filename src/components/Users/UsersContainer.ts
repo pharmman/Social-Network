@@ -8,7 +8,7 @@ import {Dispatch} from 'redux';
 export type UsersPropsType = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
 
 
-const mapStateToProps = (state:StateType):UsersPageType => {
+const mapStateToProps = (state:StateType):MapStateToPropsType => {
     return {
         users:state.usersPage.users,
         totalUsersCount: state.usersPage.totalUsersCount,
@@ -24,10 +24,12 @@ const mapStateToProps = (state:StateType):UsersPageType => {
     }
 }
 
-export type MapStateToPropsType = (state:StateType) => {
+export type MapStateToPropsType = {
     users: Array<UserType>
     totalUsersCount: number
     currentPage: number
 }
 
-export default connect<>(mapStateToProps, mapDispatchToProps)(Users);
+export type MapDispatchToPropsType = ReturnType<typeof mapDispatchToProps>
+
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, >(mapStateToProps, mapDispatchToProps)(Users);
