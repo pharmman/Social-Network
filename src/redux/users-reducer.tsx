@@ -2,6 +2,8 @@ import {ActionsType} from './store';
 
 export type UsersPageType = {
     users: Array<UserType>
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type UserType = {
@@ -16,8 +18,10 @@ export type UserType = {
 }
 
 
-const initialState = {
-    users:[]
+const initialState:UsersPageType = {
+    users:[],
+    totalUsersCount: 0,
+    currentPage: 0
 }
 
 

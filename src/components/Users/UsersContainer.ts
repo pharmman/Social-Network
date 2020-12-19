@@ -10,7 +10,9 @@ export type UsersPropsType = ReturnType<typeof mapDispatchToProps> & ReturnType<
 
 const mapStateToProps = (state:StateType):UsersPageType => {
     return {
-        users:state.usersPage.users
+        users:state.usersPage.users,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 
@@ -22,4 +24,10 @@ const mapStateToProps = (state:StateType):UsersPageType => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export type MapStateToPropsType = (state:StateType) => {
+    users: Array<UserType>
+    totalUsersCount: number
+    currentPage: number
+}
+
+export default connect<>(mapStateToProps, mapDispatchToProps)(Users);

@@ -14,7 +14,7 @@ type ResponseType = {
 
 export class Users extends React.Component<UsersPropsType, StateType> {
     componentDidMount():void {
-        axios.get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
+        axios.get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users?count=100').then(response => {
             debugger
             this.props.setUsers(response.data.items)
         })

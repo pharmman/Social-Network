@@ -6,10 +6,11 @@ import {usersReducer} from './users-reducer';
 export type StateType = ReturnType<typeof reducers>;
 
 const reducers = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    usersPage: usersReducer
-} as const);
+        profilePage: profileReducer,
+        dialogsPage: dialogsReducer,
+        usersPage: usersReducer
+    }
+);
 
 
-export const store:Store = createStore(reducers)
+export const store: Store = createStore(reducers)
