@@ -1,4 +1,10 @@
-import {AddPostActionType, ChangingValueForNewPostType} from './profile-reducer';
+import {
+    AddPostActionType,
+    ChangingValueForNewPostType,
+    ProfileType,
+    SetProfileType,
+    ToggleFetchingType
+} from './profile-reducer';
 import {AddNewMessageType, ChangeNewMessageBodyType} from './dialogs-reducer';
 import {
     FollowType,
@@ -34,6 +40,8 @@ export type PostsDataType = {
 export type ProfilePageType = {
     posts: Array<PostsDataType>
     messageForNewPost: string
+    profile: ProfileType
+    isFetching: boolean
 }
 
 // export type StateType = {
@@ -52,6 +60,8 @@ export type ActionsType =
     | SetTotalUsersCountType
     | SetCurrentUsersPageType
     | ToggleIsFetchingType
+    | SetProfileType
+    | ToggleFetchingType
 
 // export type StoreType = {
 //     _state: StateType
