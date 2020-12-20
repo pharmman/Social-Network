@@ -5,7 +5,7 @@ import {ProfileType} from '../../redux/profile-reducer';
 
 
 type ProfilePropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
 }
 
 export function Profile(props:ProfilePropsType) {

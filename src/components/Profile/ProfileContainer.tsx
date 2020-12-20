@@ -1,16 +1,16 @@
 import {StateType} from '../../redux/redux-store';
 import {Profile} from './Profile';
 import React from 'react';
-import {addPost, changingValueForNewPost, ProfileType, setProfile, toggleFetching} from '../../redux/profile-reducer';
+import {ProfileType, setProfile, toggleFetching} from '../../redux/profile-reducer';
 import axios from 'axios';
 import {connect} from 'react-redux';
 
-export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+export type MapStateToPropsType = {
+    profile: ProfileType | null
+}
 export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export type MapDispatchToPropsType = {
-    addPost: () => void,
-    changingValueForNewPost: (newValue: string) => void
     setProfile: (profile: ProfileType) => void
     toggleFetching: (isFetching: boolean) => void
 }
@@ -48,21 +48,19 @@ class ProfileContainer extends React.Component<ProfilePropsType, StateType> {
     render() {
         return (
             <>
-                <Profile profile={this.props.profile}/>
+                <Profile {...this.props} profile={this.props.profile}/>
             </>
         );
     }
 }
 
 
-const mapStateToProps = (state: StateType) => {
-return {
-    posts: state.profilePage.posts,
-    messageForNewPost: state.profilePage.messageForNewPost,
-    profile: state.profilePage.profile
-} as const
+const mapStateToProps = (state: StateType): MapStateToPropsType => {
+    return {
+        profile: state.profilePage.profile
+    }
 }
 
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType,{}, StateType>
-(mapStateToProps, {addPost,changingValueForNewPost, setProfile, toggleFetching})(ProfileContainer)
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>
+(mapStateToProps, {setProfile, toggleFetching})(ProfileContainer)
