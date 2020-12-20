@@ -56,3 +56,12 @@
 .card__location_country {
     padding-bottom: 5px;
 }
+
+.selectedPage {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.listPages {
+    cursor: pointer;
+}
