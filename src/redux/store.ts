@@ -40,7 +40,7 @@ export type PostsDataType = {
 export type ProfilePageType = {
     posts: Array<PostsDataType>
     messageForNewPost: string
-    profile: ProfileType
+    profile: ProfileType | null
     isFetching: boolean
 }
 

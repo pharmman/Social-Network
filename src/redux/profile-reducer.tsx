@@ -1,21 +1,21 @@
 import {ActionsType, ProfilePageType} from './store';
 
 export type ProfileType = {
-    userId: number | null
-    lookingForAJob: boolean | null
-    lookingForAJobDescription: string | null
-    fullName: string | null
-    contacts: string | null
-    github: string | null
-    vk: string | null
-    facebook: string | null
-    instagram: string | null
-    twitter: string | null
-    website: string | null
-    youtube: string | null
-    mainLink: string | null
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: string
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
     photos: {
-        small: string | null
+        small: string
         large: string
     }
 }
@@ -28,25 +28,7 @@ const initialState = {
         {id: 3, message: 'Yo Yo Yo', likesCount: 12},
         {id: 4, message: 'It\'s revolution Jhonny!', likesCount: 100500}
     ],
-    profile: {
-        userId: null,
-        lookingForAJob: null,
-        lookingForAJobDescription: null,
-        fullName: null,
-        contacts: null,
-        github: null,
-        vk: null,
-        facebook: null,
-        instagram: null,
-        twitter: null,
-        website: null,
-        youtube: null,
-        mainLink: null,
-        photos: {
-            small: null,
-            large: ''
-        }
-    },
+    profile: null,
     isFetching: false
 }
 
