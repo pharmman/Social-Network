@@ -16,7 +16,7 @@ const App: React.FC = () => {
                 <Navbar/>
                 <div className={'app-inner-content'}>
                     <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                    <Route path={'/profile/:userId?'}
+                    <Route path={'/profile'}
                            render={() => <ProfileContainer/>}/>
                     <Route path={'/users'}
                            render={() => <UsersContainer/>}/>
