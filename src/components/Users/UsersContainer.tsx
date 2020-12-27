@@ -42,7 +42,9 @@ class UsersContainer extends React.Component<UsersContainerPropsType, StateType>
     componentDidMount(): void {
         this.props.changeFetchingStatus(true)
         axios.get<ResponseType>
-        (`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+        (`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.changeFetchingStatus(false)
                 this.props.setTotalUsersCount(+response.data.totalCount)
@@ -55,13 +57,16 @@ class UsersContainer extends React.Component<UsersContainerPropsType, StateType>
         this.props.setCurrentPage(pageNumber)
         this.props.changeFetchingStatus(true)
         axios.get<ResponseType>
-        (`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
+        (`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.changeFetchingStatus(false)
                 this.props.setTotalUsersCount(+response.data.totalCount)
                 this.props.setUsers(response.data.items)
             })
     }
+
     render() {
         return <>
             <Users
@@ -73,7 +78,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType, StateType>
                 follow={this.props.follow}
                 isFetching={this.props.isFetching}
                 changeFetchingStatus={this.props.changeFetchingStatus}
-                onPageChanged={this.onPageChanged} />
+                onPageChanged={this.onPageChanged}/>
         </>
     }
 }
@@ -88,4 +93,11 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
     }
 }
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {follow, changeFetchingStatus, setCurrentPage, setTotalUsersCount, setUsers, unFollow})(UsersContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
+    follow,
+    changeFetchingStatus,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    unFollow
+})(UsersContainer);

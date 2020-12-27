@@ -4,6 +4,7 @@ import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.jpg'
 import {Preloader} from '../Preloader/Preloader';
 import {NavLink} from 'react-router-dom';
+import axios from 'axios';
 
 export type UsersPropsType = {
     totalUsersCount: number
@@ -17,11 +18,47 @@ export type UsersPropsType = {
     changeFetchingStatus: (fetching: boolean) => void
 }
 
+type ResponseType = {
+    resultCode: number
+    messages: string[]
+    data: {}
+}
+
 export const Users = (props: UsersPropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     const pages = [];
     for (let i = 1; i < pagesCount; i++) {
         pages.push(i)
+    }
+
+    const follow = (id:number) => {
+        axios.post<ResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+            {}, {
+                withCredentials: true,
+                headers: {
+                    'API-KEY': 'ea1464d3-6693-4a83-9755-2421f1dd088c'
+                }
+            }
+        ).then(response => {
+            if (response.data.resultCode === 0) {
+                props.follow(id)
+            }
+        })
+    }
+
+    const unFollow = (id:number) => {
+        axios.delete<ResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+            {
+                withCredentials: true,
+                headers: {
+                    'API-KEY': 'ea1464d3-6693-4a83-9755-2421f1dd088c'
+                }
+            }
+        ).then(response => {
+            if (response.data.resultCode === 0) {
+                props.unFollow(id)
+            }
+        })
     }
 
     return <>
@@ -46,8 +83,12 @@ export const Users = (props: UsersPropsType) => {
                                                               src={u.photos.small !== null ? u.photos.small : userAvatar}/></NavLink>
 
                         <div>
-                            {u.followed ? <button onClick={() => props.unFollow(u.id)}>Unfollowed</button> :
-                                <button onClick={() => props.follow(u.id)}>Follow</button>}
+                            {u.followed ?
+                                <button onClick={() => unFollow(u.id)}
+                                >Unfollowed</button> :
+
+                                <button onClick={() => follow(u.id)}>Follow</button>}
+
                         </div>
                     </div>
 
