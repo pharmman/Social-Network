@@ -17,28 +17,31 @@ type ResponseType = {
 
 type MapStateToPropsType = {
     isAuth: boolean
+    login: string | null
 }
 
 type MapDispatchToPropsType = {
     setAuthData: (id: number, email: string, login: string) => void
 }
 
-type HeaderContainerType = MapStateToPropsType & MapDispatchToPropsType
+export type HeaderContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class HeaderContainer extends React.Component<HeaderContainerType, StateType> {
+class HeaderContainer extends React.Component<HeaderContainerPropsType, StateType> {
     componentDidMount() {
         axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true
         }).then(response => {
-            const {id, email, login} = response.data.data
-            this.props.setAuthData(id, email, login)
+            if (response.data.resultCode === 0) {
+                const {id, email, login} = response.data.data
+                this.props.setAuthData(id, email, login)
+            }
         })
     }
 
     render() {
         return (
             <>
-                <Header/>
+                <Header {...this.props}/>
             </>
         );
     }
@@ -47,7 +50,8 @@ class HeaderContainer extends React.Component<HeaderContainerType, StateType> {
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        login: state.auth.login
     }
 }
 

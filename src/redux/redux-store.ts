@@ -15,3 +15,6 @@ const reducers = combineReducers({
 
 
 export const store:Store = createStore(reducers)
+
+// @ts-ignore
+window.store = store

@@ -47,7 +47,7 @@ export const Contacts = (props: ProfileInfoPropsType) => {
             <p>Website: {props.profile?.contacts.website}</p>
             <p>VK: {props.profile?.contacts.vk}</p>
             <p>Twitter: {props.profile?.contacts.twitter}</p>
-            <p>Instagramm: {props.profile?.contacts.instagram}</p>
+            <p>Instagram: {props.profile?.contacts.instagram}</p>
             <p>Youtube: {props.profile?.contacts.youtube}</p>
             <p>Github: {props.profile?.contacts.github}</p>
             <p>MainLink: {props.profile?.contacts.mainLink}</p>

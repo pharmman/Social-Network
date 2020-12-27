@@ -1,9 +1,17 @@
 .header {
     width: 1200px;
     background-color: #405898;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header__logo {
     max-height: 60px;
     text-align: end;
+}
+
+.login {
+    font-size: 20px;
+    align-self: center;
+    margin-right: 3%;
 }
