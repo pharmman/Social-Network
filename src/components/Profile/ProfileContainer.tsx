@@ -4,21 +4,32 @@ import axios from 'axios'
 import {ProfileType, setUserProfile} from '../../redux/profile-reducer';
 import {StateType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom'
+import {RouteComponentProps} from 'react-router'
 
-type mapStateToPropsType = {
+type PathParamsType = {
+    userId: string
+}
+
+type ProfileContainerType = RouteComponentProps<PathParamsType> & OwnProps
+
+type MapStateToPropsType = {
     profile: ProfileType | null
 }
 
-type mapDispatchToPropsType = {
+type MapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
 }
 
-export type ProfileContainerType = mapStateToPropsType & mapDispatchToPropsType
+export type OwnProps = MapStateToPropsType & MapDispatchToPropsType;
 
 class ProfileContainer extends React.Component<ProfileContainerType, StateType> {
     componentDidMount() {
-        axios.get<ProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        let userId:string
+        !this.props.match.params.userId ? userId = '2' : userId = this.props.match.params.userId
+        axios.get<ProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
+                debugger
                 this.props.setUserProfile(response.data)
             })
     }
@@ -32,14 +43,14 @@ class ProfileContainer extends React.Component<ProfileContainerType, StateType> 
     }
 }
 
-const mapStateToProps = (state: StateType): mapStateToPropsType => {
+const mapStateToProps = (state: StateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile
     }
 }
 
-
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, StateType>(mapStateToProps, {setUserProfile})(ProfileContainer)
+const ProfileContainerWithRouter = withRouter(ProfileContainer)
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {setUserProfile})(ProfileContainerWithRouter)
 
 
 

@@ -21,10 +21,10 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                          alt=""/>
                 </div>
                 <div>
-                {props.profile?.photos.large ? <img src={props.profile?.photos.large}
-                                                    alt=""/> :
-                    <img src={'https://i.ytimg.com/vi/bGObTk05_dQ/maxresdefault.jpg'} alt={''}/>}
-            </div>
+                    {props.profile?.photos.large ? <img src={props.profile?.photos.large}
+                                                        alt=""/> :
+                        <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'} alt={''}/>}
+                </div>
             </div>
             <div className={classes.description}>
                 <h4>About me: {props.profile?.aboutMe}</h4>

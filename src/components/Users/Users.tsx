@@ -42,8 +42,8 @@ export const Users = (props: UsersPropsType) => {
                 <div className={classes.wrapper}>
 
                     <div className={classes.avatar__wrapper}>
-                        <NavLink to={'/profile'}><img alt={'Avatar'} className={classes.avatar}
-                                                      src={u.photos.small !== null ? u.photos.small : userAvatar}/></NavLink>
+                        <NavLink to={`/profile/${u.id}`}><img alt={'Avatar'} className={classes.avatar}
+                                                              src={u.photos.small !== null ? u.photos.small : userAvatar}/></NavLink>
 
                         <div>
                             {u.followed ? <button onClick={() => props.unFollow(u.id)}>Unfollowed</button> :
