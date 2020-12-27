@@ -8,6 +8,7 @@ import {
     SetUsersType,
     UnfollowType
 } from './users-reducer';
+import {SetAuthDataType} from './auth-reducer';
 
 export type MessagesDataType = {
     id: number
@@ -54,6 +55,7 @@ export type ActionsType =
     | SetTotalUsersCountType
     | ChangeFetchingStatusType
     | SetProfileType
+    | SetAuthDataType
 
 // export type StoreType = {
 //     _state: StateType
