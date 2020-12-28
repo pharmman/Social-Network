@@ -4,7 +4,7 @@ import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.jpg'
 import {Preloader} from '../Preloader/Preloader';
 import {NavLink} from 'react-router-dom';
-import axios from 'axios';
+import {followAPI} from '../../api/api';
 
 export type UsersPropsType = {
     totalUsersCount: number
@@ -18,12 +18,6 @@ export type UsersPropsType = {
     changeFetchingStatus: (fetching: boolean) => void
 }
 
-type ResponseType = {
-    resultCode: number
-    messages: string[]
-    data: {}
-}
-
 export const Users = (props: UsersPropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     const pages = [];
@@ -32,30 +26,18 @@ export const Users = (props: UsersPropsType) => {
     }
 
     const follow = (id:number) => {
-        axios.post<ResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-            {}, {
-                withCredentials: true,
-                headers: {
-                    'API-KEY': 'ea1464d3-6693-4a83-9755-2421f1dd088c'
-                }
-            }
-        ).then(response => {
-            if (response.data.resultCode === 0) {
+        followAPI.follow(id)
+            .then(data => {
+            if (data.resultCode === 0) {
                 props.follow(id)
             }
         })
     }
 
     const unFollow = (id:number) => {
-        axios.delete<ResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-            {
-                withCredentials: true,
-                headers: {
-                    'API-KEY': 'ea1464d3-6693-4a83-9755-2421f1dd088c'
-                }
-            }
-        ).then(response => {
-            if (response.data.resultCode === 0) {
+        followAPI.unFollow(id)
+            .then(data => {
+            if (data.resultCode === 0) {
                 props.unFollow(id)
             }
         })
