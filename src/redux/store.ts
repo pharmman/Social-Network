@@ -5,7 +5,7 @@ import {
     FollowType,
     SetCurrentPageType,
     SetTotalUsersCountType,
-    SetUsersType,
+    SetUsersType, ToggleFollowingProgressType,
     UnfollowType
 } from './users-reducer';
 import {SetAuthDataType} from './auth-reducer';
@@ -56,6 +56,7 @@ export type ActionsType =
     | ChangeFetchingStatusType
     | SetProfileType
     | SetAuthDataType
+    | ToggleFollowingProgressType
 
 // export type StoreType = {
 //     _state: StateType
