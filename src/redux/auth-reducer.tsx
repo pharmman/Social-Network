@@ -1,4 +1,5 @@
 import {ActionsType} from './store';
+import {authAPI} from '../api/api';
 
 
 export type AuthDataType = {
@@ -41,4 +42,13 @@ export const setAuthData = (id: number, email: string, login: string) => {
             login
         }
     } as const
+}
+
+export const getAuthUserData = () => (dispatch:(action:ActionsType)=> void) => {
+    authAPI.authMe().then(data => {
+        if (data.resultCode === 0) {
+            const {id, email, login} = data.data
+            dispatch(setAuthData(id, email, login))
+        }
+    })
 }

@@ -1,4 +1,5 @@
 import {ActionsType, ProfilePageType} from './store';
+import {profileAPI} from '../api/api';
 
 export type ProfileType = {
     aboutMe: string
@@ -81,4 +82,11 @@ export const setUserProfile = (profile: ProfileType) => {
         type: 'SET-PROFILE',
         profile
     } as const
+}
+
+export const getUserProfile = (userId:string) => (dispatch:(action:ActionsType)=> void) => {
+    profileAPI.getProfile(userId)
+        .then(data => {
+            dispatch(setUserProfile(data))
+        })
 }
