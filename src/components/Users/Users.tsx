@@ -4,7 +4,6 @@ import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.jpg'
 import {Preloader} from '../Preloader/Preloader';
 import {NavLink} from 'react-router-dom';
-import {followAPI} from '../../api/api';
 
 export type UsersPropsType = {
     totalUsersCount: number
@@ -15,8 +14,6 @@ export type UsersPropsType = {
     users: Array<UserType>
     unFollow: (id: number) => void
     follow: (id: number) => void
-    changeFetchingStatus: (fetching: boolean) => void
-    toggleFollowingProgress: (followingProgress: boolean, userId: number) => void
     followingInProgress: number[]
 }
 
@@ -27,27 +24,6 @@ export const Users = (props: UsersPropsType) => {
         pages.push(i)
     }
 
-    const follow = (id: number) => {
-        props.toggleFollowingProgress(true, id)
-        followAPI.follow(id)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    props.follow(id)
-                }
-                props.toggleFollowingProgress(false, id)
-            })
-    }
-
-    const unFollow = (id: number) => {
-        props.toggleFollowingProgress(true, id)
-        followAPI.unFollow(id)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    props.unFollow(id)
-                }
-                props.toggleFollowingProgress(false, id)
-            })
-    }
 
     return <>
         <div className={classes.pageNumbers}>
@@ -72,11 +48,11 @@ export const Users = (props: UsersPropsType) => {
                         <div>
                             {u.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                        onClick={() => unFollow(u.id)}
+                                        onClick={() => props.unFollow(u.id)}
                                 >Unfollowed</button> :
 
                                 <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                        onClick={() => follow(u.id)}>Follow</button>}
+                                        onClick={() => props.follow(u.id)}>Follow</button>}
 
                         </div>
                     </div>
