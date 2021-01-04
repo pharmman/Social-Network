@@ -1,5 +1,6 @@
 import {ActionsType} from './store';
 import {followAPI, usersAPI} from '../api/api';
+import {restoreState, saveState} from '../localStorage/localStorage';
 
 export type UsersPageType = {
     users: Array<UserType>
@@ -25,7 +26,7 @@ export type UserType = {
 const initialState = {
     users: [],
     totalUsersCount: 0,
-    currentPage: 2,
+    currentPage: restoreState('currentUsersPage', 1),
     pageSize: 100,
     isFetching: false,
     followingInProgress: []
@@ -60,6 +61,7 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
                 users: [...action.users]
             }
         case 'SET-CURRENT-PAGE':
+            saveState('currentUsersPage', action.page)
             return {
                 ...state,
                 currentPage: action.page
