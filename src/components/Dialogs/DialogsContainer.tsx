@@ -2,7 +2,7 @@ import {addNewMessageActionCreator, changeNewMessageBodyActionCreator} from '../
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
-import {ActionsType, DialogsDataType, DialogsPageType, MessagesDataType} from '../../redux/store';
+import {ActionsType, DialogsDataType, MessagesDataType} from '../../redux/store';
 import {Dispatch} from 'redux';
 
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -15,14 +15,16 @@ type MapDispatchToPropsType = {
 type MapStateToPropsType = {
     dialogs: DialogsDataType[]
     messages: MessagesDataType[]
-    textForNewMessage: string
+    textForNewMessage: string,
+    isAuth:boolean
 }
 
-const mapStateToProps = (state: StateType): DialogsPageType => {
+const mapStateToProps = (state: StateType): MapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        textForNewMessage: state.dialogsPage.textForNewMessage
+        textForNewMessage: state.dialogsPage.textForNewMessage,
+        isAuth: state.auth.isAuth
     }
 }
 
