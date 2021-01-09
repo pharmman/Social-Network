@@ -25,7 +25,6 @@ export const Users = (props: UsersPropsType) => {
     }
 
 
-
     return <>
         <div className={classes.pageNumbers}>
             {pages.map((p, index) => {

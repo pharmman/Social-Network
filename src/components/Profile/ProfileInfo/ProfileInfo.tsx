@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css'
 import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../Preloader/Preloader';
+import {ProfileStatus} from './ProfileStatus';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -24,6 +25,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                     {props.profile?.photos.large ? <img src={props.profile?.photos.large}
                                                         alt=""/> :
                         <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'} alt={''}/>}
+                        <ProfileStatus/>
                 </div>
             </div>
             <div className={classes.description}>
