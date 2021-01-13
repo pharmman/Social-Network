@@ -7,7 +7,7 @@ type GetUsersResponseType = {
     error: string | null
 }
 
-type FollowResponseType = {
+type ResponseType = {
     resultCode: number
     messages: string[]
     data: {}
@@ -64,13 +64,13 @@ export const usersAPI = {
 
 export const followAPI = {
     follow(id:number) {
-        return instance.post<FollowResponseType>(`follow/${id}`)
+        return instance.post<ResponseType>(`follow/${id}`)
             .then(response => {
                 return response.data
             })
     },
     unFollow(id:number) {
-        return instance.delete<FollowResponseType>(`follow/${id}`)
+        return instance.delete<ResponseType>(`follow/${id}`)
             .then(response => {
                 return response.data
             })
@@ -80,6 +80,18 @@ export const followAPI = {
 export const profileAPI = {
     getProfile(userId:string) {
         return instance.get<ProfileResponseType>(`profile/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    getProfileStatus(userId:string) {
+        return instance.get<string>(`profile/status/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    updateProfileStatus(status: string) {
+        return instance.put<ResponseType>('profile/status',{status})
             .then(response => {
                 return response.data
             })

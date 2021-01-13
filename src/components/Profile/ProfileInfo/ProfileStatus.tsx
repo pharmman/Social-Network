@@ -1,33 +1,59 @@
-import React from 'react';
-import {StateType} from '../../../redux/redux-store';
+import React, {ChangeEvent} from 'react';
 
 type ProfileStatusPropsType = {
     status: string
+    updateProfileStatus: (status: string) => void
 }
 
-export class ProfileStatus extends React.Component<ProfileStatusPropsType, StateType> {
+type LocalStateType = {
+    editMode: boolean,
+    status: string
+}
+
+export class ProfileStatus extends React.Component<ProfileStatusPropsType, LocalStateType> {
 
     state = {
-        editMode:false
+        editMode: false,
+        status: this.props.status
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<LocalStateType>) {
+
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     activateEditMod = () => {
-        this.state.editMode = true;
-        this.forceUpdate()
+        console.log(this)
+        this.setState({
+            editMode: true
+        })
     }
 
     deActivateEditMod = () => {
-        this.state.editMode = false;
-        this.forceUpdate()
+        this.setState({
+            editMode: false,
+        })
+        this.props.updateProfileStatus(this.state.status)
+    }
+
+    onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
     }
 
     render() {
         return (
             <div>
                 {this.state.editMode ?
-                    <input defaultValue={'input'} autoFocus={true} onBlur={this.deActivateEditMod}/>
+                    <input onChange={this.onchangeHandler} value={this.state.status} autoFocus={true}
+                           onBlur={this.deActivateEditMod}/>
                     :
-                    <span onDoubleClick={this.activateEditMod}>span</span>}
+                    <span onDoubleClick={this.activateEditMod}>{this.props.status}</span>}
             </div>
         )
     }

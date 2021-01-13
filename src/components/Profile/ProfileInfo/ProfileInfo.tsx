@@ -3,9 +3,12 @@ import classes from './ProfileInfo.module.css'
 import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../Preloader/Preloader';
 import {ProfileStatus} from './ProfileStatus';
+import {Contacts} from '../Contacts/Contacts';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
+    updateProfileStatus: (status: string) => void
+    status: string
 }
 
 export function ProfileInfo(props: ProfileInfoPropsType) {
@@ -24,8 +27,9 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                 <div>
                     {props.profile?.photos.large ? <img src={props.profile?.photos.large}
                                                         alt=""/> :
-                        <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'} alt={''}/>}
-                        <ProfileStatus/>
+                        <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'}
+                             alt={''}/>}
+                    <ProfileStatus updateProfileStatus={props.updateProfileStatus}  status={props.status || '-----'}/>
                 </div>
             </div>
             <div className={classes.description}>
@@ -42,18 +46,4 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 }
 
 
-export const Contacts = (props: ProfileInfoPropsType) => {
-    return (
-        <>
-            <p>Facebook: {props.profile?.contacts.facebook}</p>
-            <p>Website: {props.profile?.contacts.website}</p>
-            <p>VK: {props.profile?.contacts.vk}</p>
-            <p>Twitter: {props.profile?.contacts.twitter}</p>
-            <p>Instagram: {props.profile?.contacts.instagram}</p>
-            <p>Youtube: {props.profile?.contacts.youtube}</p>
-            <p>Github: {props.profile?.contacts.github}</p>
-            <p>MainLink: {props.profile?.contacts.mainLink}</p>
-        </>
-    )
-}
 
