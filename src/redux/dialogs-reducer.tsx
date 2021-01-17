@@ -20,32 +20,21 @@ const initialState = {
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
     switch (action.type) {
-        case 'CHANGE-NEW-MESSAGE-BODY':
-            return {
-                ...state, textForNewMessage: action.value
-            }
-        // dialogsPage.textForNewMessage = action.value;
-        // return dialogsPage;
         case 'ADD-NEW-MESSAGE':
             return {
                 ...state,
-                messages: [...state.messages, {id: 6, message: state.textForNewMessage}],
+                messages: [...state.messages, {id: 6, message: action.value}],
                 textForNewMessage: ''
             }
         default:
             return state
     }
 }
-export type ChangeNewMessageBodyType = ReturnType<typeof changeNewMessageBodyActionCreator>
 export type AddNewMessageType = ReturnType<typeof addNewMessageActionCreator>
-export const changeNewMessageBodyActionCreator = (newValue: string) => {
+
+export const addNewMessageActionCreator = (value:string) => {
     return {
-        type: 'CHANGE-NEW-MESSAGE-BODY',
-        value: newValue
-    } as const
-}
-export const addNewMessageActionCreator = () => {
-    return {
-        type: 'ADD-NEW-MESSAGE'
+        type: 'ADD-NEW-MESSAGE',
+        value
     } as const
 }

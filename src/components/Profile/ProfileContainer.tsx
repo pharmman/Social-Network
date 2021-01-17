@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import {RouteComponentProps} from 'react-router'
 import {compose} from 'redux';
-import {withAuthRedirect} from '../../hoc/AuthRedirect';
 
 type PathParamsType = {
     userId: string

@@ -40,13 +40,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'ADD-POST':
             return {
                 ...state,
-                posts: [...state.posts, {id: 5, message: state.messageForNewPost, likesCount: 0}],
-                messageForNewPost: ''
-            }
-        case 'CHANGING-VALUE-FOR-NEW-POST':
-            return {
-                ...state,
-                messageForNewPost: action.value
+                posts: [...state.posts, {id: 5, message: action.value, likesCount: 0}],
             }
         case 'SET-PROFILE':
             return {
@@ -63,11 +57,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
     }
 }
 export type AddPostActionType = {
-    type: 'ADD-POST'
-}
-export type ChangingValueForNewPostType = {
-    type: 'CHANGING-VALUE-FOR-NEW-POST',
-    value: string
+    type: 'ADD-POST',
+    value:string
 }
 
 export type SetProfileStatusType = {
@@ -78,15 +69,10 @@ export type SetProfileStatusType = {
 export type SetProfileType = ReturnType<typeof setUserProfile>
 
 
-export const addPostActionCreator = (): AddPostActionType => {
+export const addPostActionCreator = (value:string): AddPostActionType => {
     return {
-        type: 'ADD-POST'
-    }
-};
-export const changingValueForNewPostActionCreator = (newValue: string): ChangingValueForNewPostType => {
-    return {
-        type: 'CHANGING-VALUE-FOR-NEW-POST',
-        value: newValue
+        type: 'ADD-POST',
+        value
     }
 };
 

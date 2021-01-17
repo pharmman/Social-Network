@@ -1,11 +1,10 @@
 import {
     AddPostActionType,
-    ChangingValueForNewPostType,
     ProfileType,
     SetProfileStatusType,
     SetProfileType
 } from './profile-reducer';
-import {AddNewMessageType, ChangeNewMessageBodyType} from './dialogs-reducer';
+import {AddNewMessageType} from './dialogs-reducer';
 import {
     ChangeFetchingStatusType,
     FollowType,
@@ -53,8 +52,6 @@ export type ProfilePageType = {
 
 export type ActionsType =
     AddPostActionType
-    | ChangingValueForNewPostType
-    | ChangeNewMessageBodyType
     | AddNewMessageType
     | FollowType
     | UnfollowType
