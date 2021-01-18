@@ -2,6 +2,8 @@ import React from 'react';
 import {Post} from './Post/Post';
 import {MyPostsPropsType} from './MyPostsContainer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {required} from '../../../validators/validators';
+import {Textarea} from '../../common/formContorols/FormControls';
 
 type FormDataType = {
     postValue: string
@@ -31,10 +33,11 @@ export function MyPosts(props:MyPostsPropsType) {
     )
 }
 
+
 const MyPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name={'postValue'} component={'textarea'}/>
+            <Field validate={[required]} name={'postValue'} component={Textarea}/>
             <button>Add post</button>
         </form>
     )

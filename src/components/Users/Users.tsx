@@ -2,7 +2,7 @@ import React from 'react';
 import {UserType} from '../../redux/users-reducer';
 import classes from './Users.module.css'
 import userAvatar from '../../assets/images/userAvatar.jpg'
-import {Preloader} from '../Preloader/Preloader';
+import {Preloader} from '../common/Preloader/Preloader';
 import {NavLink} from 'react-router-dom';
 
 export type UsersPropsType = {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css'
 import {ProfileType} from '../../../redux/profile-reducer';
-import {Preloader} from '../../Preloader/Preloader';
+import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileStatus} from './ProfileStatus';
 import {Contacts} from '../Contacts/Contacts';
 

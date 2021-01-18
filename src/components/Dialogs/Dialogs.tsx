@@ -4,10 +4,14 @@ import {Message} from './Message/Message';
 import classes from './Dialogs.module.css'
 import {DialogsPropsType} from './DialogsContainer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLength, required} from '../../validators/validators';
+import {Textarea} from '../common/formContorols/FormControls';
 
 type FormDataType = {
     message: string
 }
+
+const maxLength10 = maxLength(10)
 
 
 export function Dialogs(props: DialogsPropsType) {
@@ -41,7 +45,7 @@ const DialogMessage:React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={'message'} component={'textarea'}/>
+                <Field name={'message'} component={Textarea} validate={[required, maxLength10]}/>
             </div>
             <div>
                 <button>Send Message</button>
