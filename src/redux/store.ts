@@ -15,6 +15,11 @@ import {
     UnfollowType
 } from './users-reducer';
 import {SetAuthDataType} from './auth-reducer';
+import {ThunkAction} from 'redux-thunk';
+import {StateType} from './redux-store';
+import {FormAction} from 'redux-form';
+import {Action} from 'redux';
+import {InjectedFormProps} from 'redux-form/lib/reduxForm';
 
 export type MessagesDataType = {
     id: number
@@ -63,6 +68,9 @@ export type ActionsType =
     | SetAuthDataType
     | ToggleFollowingProgressType
     | SetProfileStatusType
+
+export type ThunkType = ThunkAction<void, StateType, unknown, ActionsType>
+
 
 // export type StoreType = {
 //     _state: StateType

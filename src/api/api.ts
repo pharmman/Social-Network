@@ -14,33 +14,33 @@ type ResponseType = {
 }
 
 type ProfileResponseType = {
-        aboutMe: string
-        contacts: {
-            facebook: null | string
-            website: null | string
-            vk: null | string
-            twitter: null | string
-            instagram: null | string
-            youtube: null | string
-            github: null | string
-            mainLink: null | string
-        }
-        lookingForAJob: boolean
-        lookingForAJobDescription: string
-        fullName: string
-        userId: number
-        photos: {
-            small: string
-            large: string
-        }
+    aboutMe: string
+    contacts: {
+        facebook: null | string
+        website: null | string
+        vk: null | string
+        twitter: null | string
+        instagram: null | string
+        youtube: null | string
+        github: null | string
+        mainLink: null | string
+    }
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {
+        small: string
+        large: string
+    }
 }
 
-type AuthMeResponseType = {
-    data: {
-        id: number
-        email: string
-        login: string
-    }
+type AuthMeResponseType<T = {
+    id: number
+    email: string
+    login: string
+}> = {
+    data: T
     resultCode: number
     messages: Array<string>
 }
@@ -54,22 +54,22 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers (currentPage:number = 1, pageSize: number = 10) {
-       return instance.get<GetUsersResponseType>(`users?count=${pageSize}&page=${currentPage}`)
-           .then(response => {
-               return response.data
-           })
-}
+    getUsers(currentPage: number = 1, pageSize: number = 10) {
+        return instance.get<GetUsersResponseType>(`users?count=${pageSize}&page=${currentPage}`)
+            .then(response => {
+                return response.data
+            })
+    }
 }
 
 export const followAPI = {
-    follow(id:number) {
+    follow(id: number) {
         return instance.post<ResponseType>(`follow/${id}`)
             .then(response => {
                 return response.data
             })
     },
-    unFollow(id:number) {
+    unFollow(id: number) {
         return instance.delete<ResponseType>(`follow/${id}`)
             .then(response => {
                 return response.data
@@ -78,20 +78,20 @@ export const followAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userId:string) {
+    getProfile(userId: string) {
         return instance.get<ProfileResponseType>(`profile/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    getProfileStatus(userId:string) {
+    getProfileStatus(userId: string) {
         return instance.get<string>(`profile/status/${userId}`)
             .then(response => {
                 return response.data
             })
     },
     updateProfileStatus(status: string) {
-        return instance.put<ResponseType>('profile/status',{status})
+        return instance.put<ResponseType>('profile/status', {status})
             .then(response => {
                 return response.data
             })
@@ -101,6 +101,22 @@ export const profileAPI = {
 export const authAPI = {
     authMe() {
         return instance.get<AuthMeResponseType>('/auth/me')
+            .then(response => {
+                return response.data
+            })
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post<AuthMeResponseType<{ userId: number }>>('auth/login', {
+            email,
+            password,
+            rememberMe,
+        })
+            .then(response => {
+                return response.data
+            })
+    },
+    logOut() {
+        return instance.delete<AuthMeResponseType<Object>>('auth/login',)
             .then(response => {
                 return response.data
             })
