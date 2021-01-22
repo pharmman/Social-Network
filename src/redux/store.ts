@@ -1,9 +1,4 @@
-import {
-    AddPostActionType,
-    ProfileType,
-    SetProfileStatusType,
-    SetProfileType
-} from './profile-reducer';
+import {AddPostActionType, ProfileType, SetProfileStatusType, SetProfileType} from './profile-reducer';
 import {AddNewMessageType} from './dialogs-reducer';
 import {
     ChangeFetchingStatusType,
@@ -17,9 +12,7 @@ import {
 import {SetAuthDataType} from './auth-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {StateType} from './redux-store';
-import {FormAction} from 'redux-form';
-import {Action} from 'redux';
-import {InjectedFormProps} from 'redux-form/lib/reduxForm';
+import {AppReducerActionsType} from './app-reducer';
 
 export type MessagesDataType = {
     id: number
@@ -57,6 +50,7 @@ export type ProfilePageType = {
 
 export type ActionsType =
     AddPostActionType
+    | AppReducerActionsType
     | AddNewMessageType
     | FollowType
     | UnfollowType

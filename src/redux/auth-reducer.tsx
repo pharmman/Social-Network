@@ -1,10 +1,9 @@
 import {ActionsType, ThunkType} from './store';
 import {authAPI} from '../api/api';
-import {FormErrors, stopSubmit} from 'redux-form';
-import {FormAction} from 'redux-form/lib/actions';
+import {stopSubmit} from 'redux-form';
 import {ThunkAction} from 'redux-thunk';
 import {StateType} from './redux-store';
-import {Action} from 'redux';
+import {Action, Dispatch} from 'redux';
 
 
 export type AuthDataType = {
@@ -48,8 +47,8 @@ export const setAuthData = (id: number | null, email: string | null, login: stri
     } as const
 }
 
-export const getAuthUserData = (): ThunkType => (dispatch) => {
-    authAPI.authMe().then(data => {
+export const getAuthUserData = ()=> (dispatch:Dispatch) => {
+    return authAPI.authMe().then(data => {
         if (data.resultCode === 0) {
             const {id, email, login} = data.data
             dispatch(setAuthData(id, email, login, true))

@@ -11,7 +11,7 @@ type PathParamsType = {
     userId: string
 }
 
-type ProfileContainerType = RouteComponentProps<PathParamsType> & OwnProps
+type ProfileContainerType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 type MapStateToPropsType = {
     profile: ProfileType | null
@@ -26,17 +26,25 @@ type MapDispatchToPropsType = {
     getProfileStatus: (userId: string) => void
 }
 
-export type OwnProps = MapStateToPropsType & MapDispatchToPropsType;
+export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 class ProfileContainer extends React.Component<ProfileContainerType, StateType> {
     componentDidMount() {
-        if (this.props.authorizedUserId) {
-            let userId: string
-            !this.props.match.params.userId ? userId = this.props.authorizedUserId.toString() : userId = this.props.match.params.userId
-            debugger
+        let userId: string
+        if (this.props.match.params.userId) {
+            userId = this.props.match.params.userId
             this.props.getUserProfile(userId)
             this.props.getProfileStatus(userId)
         }
+        if (!this.props.match.params.userId && this.props.authorizedUserId) {
+            userId = this.props.authorizedUserId.toString()
+            this.props.getUserProfile(userId)
+            this.props.getProfileStatus(userId)
+        }
+        if (!this.props.match.params.userId && !this.props.authorizedUserId) {
+            this.props.history.push('/login')
+        }
+
     }
 
     render() {
@@ -50,11 +58,11 @@ class ProfileContainer extends React.Component<ProfileContainerType, StateType> 
 }
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => {
-        return {
-            profile: state.profilePage.profile,
-            status: state.profilePage.status,
-            authorizedUserId: state.auth.id,
-            isAuth: state.auth.isAuth
+    return {
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isAuth: state.auth.isAuth
     }
 }
 
