@@ -1,8 +1,16 @@
 import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
 import {Users} from './Users';
-import {follow, getUsers, setCurrentPage, setTotalUsersCount, unFollow, UserType} from '../../redux/users-reducer';
+import {follow, requestUsers, setCurrentPage, setTotalUsersCount, unFollow, UserType} from '../../redux/users-reducer';
 import React from 'react';
+import {
+    getCurrentPage,
+    getFetching,
+    getFollowingProgress,
+    getTotalUsersCount,
+    getUsers,
+    getUsersPageSize
+} from '../../redux/users-selectors';
 
 
 type MapDispatchToPropsType = {
@@ -52,12 +60,12 @@ class UsersContainer extends React.Component<UsersContainerPropsType, StateType>
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        currentPage: state.usersPage.currentPage,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsers(state),
+        currentPage: getCurrentPage(state),
+        pageSize: getUsersPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        isFetching: getFetching(state),
+        followingInProgress: getFollowingProgress(state),
     }
 }
 
@@ -66,5 +74,5 @@ export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateTyp
     setCurrentPage,
     setTotalUsersCount,
     unFollow,
-    getUsers
+    getUsers: requestUsers
 })(UsersContainer);
