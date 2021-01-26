@@ -18,7 +18,7 @@ type MapDispatchToPropsType = {
     unFollow: (userId: number) => void
     setCurrentPage: (page: number) => void
     setTotalUsersCount: (count: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
+    requestUsers: (currentPage: number, pageSize: number) => void
 }
 
 type MapStateToPropsType = {
@@ -34,11 +34,11 @@ type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component<UsersContainerPropsType, StateType> {
     componentDidMount(): void {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        this.props.requestUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -74,5 +74,5 @@ export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateTyp
     setCurrentPage,
     setTotalUsersCount,
     unFollow,
-    getUsers: requestUsers
+    requestUsers
 })(UsersContainer);
