@@ -1,5 +1,6 @@
 import {ActionsType, ProfilePageType} from './store';
 import {profileAPI} from '../api/api';
+import {Dispatch} from 'redux';
 
 export type ProfileType = {
     aboutMe: string
@@ -104,7 +105,7 @@ export const getProfileStatus = (userId: string) => (dispatch: (action: ActionsT
         })
 }
 
-export const updateProfileStatus = (status: string) => (dispatch: (action: ActionsType) => void) => {
+export const updateProfileStatus = (status: string) => (dispatch:Dispatch) => {
     profileAPI.updateProfileStatus(status)
         .then(data => {
             if (data.resultCode === 0) {

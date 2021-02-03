@@ -35,7 +35,6 @@ export const mapStateToProps = (state:StateType) => {
 class App extends React.Component<AppPropsType, StateType> {
 
     componentDidMount() {
-        debugger
         this.props.initializeApp()
     }
 

@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css'
 import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
-import {ProfileStatus} from './ProfileStatus';
 import {Contacts} from '../Contacts/Contacts';
+import {ProfileStatusWithHooks} from './ProfileStatusWithHook';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -17,6 +17,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
         return <Preloader/>
     }
 
+
     return (
         <div className={classes.profile}>
             <div className={classes.profile__img}>
@@ -29,7 +30,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                                                         alt=""/> :
                         <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'}
                              alt={''}/>}
-                    <ProfileStatus updateProfileStatus={props.updateProfileStatus}  status={props.status || '-----'}/>
+                    <ProfileStatusWithHooks updateProfileStatus={props.updateProfileStatus}  propsStatus={props.status || '-----'}/>
                 </div>
             </div>
             <div className={classes.description}>
