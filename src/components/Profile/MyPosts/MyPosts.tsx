@@ -10,20 +10,16 @@ type FormDataType = {
 }
 
 
-export function MyPosts(props:MyPostsPropsType) {
-
+ export const MyPosts = (props: MyPostsPropsType) => {
+     console.log('yo')
     const posts = props.posts.map(p => {
         return (
             <Post key={p.id} messages={p.message} likesCount={p.likesCount}/>
         )
     })
-
-
     const addPost = (value: FormDataType) => {
         props.addPost(value.postValue)
     }
-
-
     return (
         <div>
             My posts
@@ -32,7 +28,6 @@ export function MyPosts(props:MyPostsPropsType) {
         </div>
     )
 }
-
 
 const MyPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
