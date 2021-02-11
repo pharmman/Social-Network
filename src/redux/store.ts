@@ -1,4 +1,4 @@
-import {AddPostActionType, ProfileType, SetProfileStatusType, SetProfileType} from './profile-reducer';
+import {AddPostActionType, DeletePostType, ProfileType, SetProfileStatusType, SetProfileType} from './profile-reducer';
 import {AddNewMessageType} from './dialogs-reducer';
 import {
     ChangeFetchingStatusType,
@@ -62,6 +62,7 @@ export type ActionsType =
     | SetAuthDataType
     | ToggleFollowingProgressType
     | SetProfileStatusType
+| DeletePostType
 
 export type ThunkType = ThunkAction<void, StateType, unknown, ActionsType>
 
