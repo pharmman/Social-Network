@@ -7,7 +7,7 @@ type GetUsersResponseType = {
     error: string | null
 }
 
-type ResponseType = {
+export type ResponseType = {
     resultCode: number
     messages: string[]
     data: {}

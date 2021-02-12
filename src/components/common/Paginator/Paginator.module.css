@@ -1,0 +1,10 @@
+.pageNumbers {
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.currentPage {
+    font-weight: bold;
+    font-size: 1.2em;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {Input} from '../common/formContorols/FormControls';
+import {InjectedFormProps, reduxForm} from 'redux-form';
+import {createField, Input} from '../common/formContorols/FormControls';
 import {maxLength, required} from '../../validators/validators';
 import {connect} from 'react-redux';
 import {loginTC, logOutTC} from '../../redux/auth-reducer';
@@ -53,17 +53,9 @@ const maxLength30 = maxLength(30)
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field validate={[maxLength30, required]} placeholder={'Email'} name={'email'} component={Input}/>
-            </div>
-            <div>
-                <Field validate={[maxLength30, required]} type={'password'} placeholder={'Password'} name={'password'}
-                       component={Input}/>
-            </div>
-            <div>
-                <Field type={'checkbox'} placeholder={'Password'} name={'RememberMe'} component={Input}/>
-                <span> Remember me</span>
-            </div>
+            {createField('Email', 'email', Input,'email', [maxLength30, required])}
+            {createField('Password', 'password', Input,'password', [maxLength30, required] )}
+            {createField(null, 'RememberMe', Input,'checkbox',[],' Remember me')}
             <div>
                 <button>Login</button>
             </div>
