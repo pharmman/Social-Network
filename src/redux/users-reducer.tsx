@@ -28,7 +28,7 @@ const initialState = {
     users: [],
     totalUsersCount: 0,
     currentPage: restoreState('currentUsersPage', 1),
-    pageSize: 100,
+    pageSize: 12,
     isFetching: false,
     followingInProgress: []
 }
