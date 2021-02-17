@@ -3,7 +3,7 @@ import {UserType} from '../../redux/users-reducer';
 import classes from './Users.module.css'
 import {Preloader} from '../common/Preloader/Preloader';
 import {User} from './User';
-import ReactPaginate from 'react-paginate';
+import {Paginator} from '../common/Paginator/Paginator';
 
 export type UsersPropsType = {
     totalUsersCount: number
@@ -24,19 +24,15 @@ export const Users = (props: UsersPropsType) => {
         pages.push(i)
     }
 
-    const onChangeHandler = (p:number) => {
+    const onChangeHandler = (p: number) => {
         props.onPageChanged(p)
     }
 
-
     return <>
-        {/*<Paginator*/}
-        {/*    totalUsersCount={props.totalUsersCount}*/}
-        {/*    pageSize={props.pageSize}*/}
-        {/*    onPageChanged={props.onPageChanged}*/}
-        {/*    currentPage={props.currentPage}/>*/}
-        <ReactPaginate pageCount={Math.ceil(props.totalUsersCount / props.pageSize)} pageRangeDisplayed={8}
-                       marginPagesDisplayed={2} onPageChange={(p) => onChangeHandler(p.selected)} />
+        <Paginator
+            totalUsersCount={props.totalUsersCount}
+            pageSize={props.pageSize}
+            onChangeHandler={onChangeHandler}/>
         {props.isFetching && <Preloader/>
         }
         {props.users.map(u => <div key={u.id}>

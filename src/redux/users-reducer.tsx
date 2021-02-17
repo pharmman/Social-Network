@@ -1,8 +1,7 @@
 import {ActionsType, ThunkType} from './store';
-import {followAPI, usersAPI} from '../api/api';
-import {restoreState, saveState} from '../localStorage/localStorage';
-import {Dispatch} from "redux";
-import {ResponseType} from '../api/api';
+import {followAPI, ResponseType, usersAPI} from '../api/api';
+import {saveState} from '../localStorage/localStorage';
+import {Dispatch} from 'redux';
 
 export type UsersPageType = {
     users: Array<UserType>
@@ -27,8 +26,8 @@ export type UserType = {
 const initialState = {
     users: [],
     totalUsersCount: 0,
-    currentPage: restoreState('currentUsersPage', 1),
-    pageSize: 12,
+    currentPage: 1,
+    pageSize: 10,
     isFetching: false,
     followingInProgress: []
 }
