@@ -1,6 +1,12 @@
 import React from 'react';
 import {Profile} from './Profile';
-import {getProfileStatus, getUserProfile, ProfileType, updateProfileStatus} from '../../redux/profile-reducer';
+import {
+    getProfileStatus,
+    getUserProfile,
+    ProfileType,
+    updateProfilePhoto,
+    updateProfileStatus
+} from '../../redux/profile-reducer';
 import {StateType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
@@ -18,18 +24,21 @@ type MapStateToPropsType = {
     status: string
     authorizedUserId: number | null
     isAuth: boolean
+    userId: number | undefined
 }
 
 type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     updateProfileStatus: (status: string) => void
+    updateProfilePhoto: (file: File) => void,
     getProfileStatus: (userId: string) => void
 }
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 class ProfileContainer extends React.Component<ProfileContainerType, StateType> {
-    componentDidMount() {
+
+    renderProfile() {
         let userId: string
         if (this.props.match.params.userId) {
             userId = this.props.match.params.userId
@@ -44,13 +53,25 @@ class ProfileContainer extends React.Component<ProfileContainerType, StateType> 
         if (!this.props.match.params.userId && !this.props.authorizedUserId) {
             this.props.history.push('/login')
         }
+    }
+
+    componentDidMount() {
+        this.renderProfile()
 
     }
+
+    componentDidUpdate(prevProps: Readonly<ProfileContainerType>, prevState: Readonly<StateType>, snapshot?: any) {
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+            this.renderProfile()
+        }
+    }
+
 
     render() {
         return (
             <>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props} updateProfilePhoto={this.props.updateProfilePhoto} profile={this.props.profile}
+                         owner={!!this.props.match.params.userId}/>
             </>
         )
     }
@@ -61,7 +82,8 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         authorizedUserId: state.auth.id,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        userId: state.profilePage.profile?.userId
     }
 }
 
@@ -71,7 +93,8 @@ export default compose<React.ComponentType>(
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
         getUserProfile,
         updateProfileStatus,
-        getProfileStatus
+        getProfileStatus,
+        updateProfilePhoto
     }))(ProfileContainer)
 
 

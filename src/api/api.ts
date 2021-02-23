@@ -7,10 +7,10 @@ type GetUsersResponseType = {
     error: string | null
 }
 
-export type ResponseType = {
+export type ResponseType<T = {}> = {
     resultCode: number
     messages: string[]
-    data: {}
+    data: T
 }
 
 type ProfileResponseType = {
@@ -92,6 +92,18 @@ export const profileAPI = {
     },
     updateProfileStatus(status: string) {
         return instance.put<ResponseType>('profile/status', {status})
+            .then(response => {
+                return response.data
+            })
+    },
+    updateProfilePhoto(photo: File) {
+        let data = new FormData();
+        data.append('photo', photo);
+        return instance.put<ResponseType<{ photos: { small: string, large: string } }>>('profile/photo', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
             .then(response => {
                 return response.data
             })
