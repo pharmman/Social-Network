@@ -44,9 +44,8 @@ export type PostsDataType = {
 }
 
 export type ProfilePageType = {
-    profile: null | ProfileType
+    profile: ProfileType
     posts: Array<PostsDataType>
-    messageForNewPost: string
     status: string
 }
 

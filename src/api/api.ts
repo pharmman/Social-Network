@@ -16,14 +16,14 @@ export type ResponseType<T = {}> = {
 type ProfileResponseType = {
     aboutMe: string
     contacts: {
-        facebook: null | string
-        website: null | string
-        vk: null | string
-        twitter: null | string
-        instagram: null | string
-        youtube: null | string
-        github: null | string
-        mainLink: null | string
+        facebook: string
+        website: string
+        vk: string
+        twitter: string
+        instagram: string
+        youtube: string
+        github: string
+        mainLink: string
     }
     lookingForAJob: boolean
     lookingForAJobDescription: string

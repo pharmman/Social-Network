@@ -19,13 +19,7 @@ type PathParamsType = {
 
 type ProfileContainerType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-type MapStateToPropsType = {
-    profile: ProfileType | null
-    status: string
-    authorizedUserId: number | null
-    isAuth: boolean
-    userId: number | undefined
-}
+type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
 type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
@@ -70,14 +64,19 @@ class ProfileContainer extends React.Component<ProfileContainerType, StateType> 
     render() {
         return (
             <>
-                <Profile {...this.props} updateProfilePhoto={this.props.updateProfilePhoto} profile={this.props.profile}
+                <Profile
+                    {...this.props}
+                    updateProfilePhoto={this.props.updateProfilePhoto}
+                    status={this.props.status}
+                    profile={this.props.profile}
+                    updateProfileStatus={this.props.updateProfileStatus}
                          owner={!!this.props.match.params.userId}/>
             </>
         )
     }
 }
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => {
+const mapStateToProps = (state: StateType) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,

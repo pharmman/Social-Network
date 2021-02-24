@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css'
-import {ProfileType} from '../../../redux/profile-reducer';
+import {ContactsType, ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
-import {Contacts} from '../Contacts/Contacts';
+import {Contact} from './Contact/Contact';
 import {ProfileStatusWithHooks} from './ProfileStatusWithHook';
+import {createField, Input, Textarea} from '../../common/formContorols/FormControls';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -13,6 +14,7 @@ type ProfileInfoPropsType = {
     updateProfilePhoto: (photo: File) => void
 }
 
+
 export function ProfileInfo(props: ProfileInfoPropsType) {
     const [accordionMode, setAccordionMode] = useState<boolean>(false)
 
@@ -21,11 +23,13 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             props.updateProfilePhoto(selectorFiles[0])
         }
     }
-
     if (!props.profile) {
         return <Preloader/>
     }
-    console.log(props.profile.photos.large)
+
+    // const temp:ContactsKeys[] = Object.keys(props.profile.contacts)
+    const contactsTemp: { [key: string]: string | null } = props.profile.contacts
+
     return (
         <div className={classes.profile}>
             <div className={classes.profile__img}>
@@ -48,17 +52,46 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                 </div>
             </div>
             <div className={classes.description}>
-                <h4>About me: {props.profile?.aboutMe}</h4>
-                <h4 style={{cursor: 'pointer', display: 'inline-block'}}
-                    onClick={() => setAccordionMode(!accordionMode)}>CONTACTS:</h4>
-                {accordionMode && <Contacts profile={props.profile}/>}
-                <h4>Looking for a Job: {props.profile?.lookingForAJob ? '🤑' : '🤢'}</h4>
-                <h4>Looking For A Job Description: {props.profile?.lookingForAJobDescription}</h4>
-                <h4>Full name: {props.profile?.fullName}</h4>
+
             </div>
         </div>
     )
 }
 
+export const ProfileInfoData = () => {
+    return(
+        <>
+            <h4>About me: {props.profile?.aboutMe}</h4>
+            <h4 style={{cursor: 'pointer', display: 'inline-block'}}
+                onClick={() => setAccordionMode(!accordionMode)}>CONTACTS:</h4>
+            {accordionMode &&
+            Object.keys(props.profile.contacts).map((key: string, index) => {
+                return <Contact contacts={props.profile?.contacts} key={index} title={key}
+                                value={props.profile?.contacts[key as keyof ContactsType]}/>
+            })}
+            <h4>Looking for a Job: {props.profile?.lookingForAJob ? '🤑' : '🤢'}</h4>
+            <h4>Looking For A Job Description: {props.profile?.lookingForAJobDescription}</h4>
+            <h4>Full name: {props.profile?.fullName}</h4>
+        </>
+    )
+}
+
+export const ProfileInfoForm = () => {
+    return (
+        <div>
+            <form>
+                <button>save</button>
+                <h4>About me: {createField('About me', 'aboutMe', Input, 'text')}</h4>
+                <h4 style={{cursor: 'pointer', display: 'inline-block'}}
+                    onClick={() => props.setAccordionMode(!props.accordionMode)}>CONTACTS:</h4>
+                <h4>Looking for a
+                    Job: {createField('', 'lookingJob', Input, 'checkbox', null, 'Looking for a job')}</h4>
+                <h4>Looking For A Job
+                    Description: {createField('Looking For A Job Description', 'jobDescription', Textarea, 'text')}</h4>
+                <h4>Full name: {createField('Full name', 'fullName', Input, 'text')}</h4>
+            </form>
+        </div>
+    )
+}
 
 

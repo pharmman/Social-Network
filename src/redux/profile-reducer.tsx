@@ -3,16 +3,7 @@ import {profileAPI} from '../api/api';
 
 export type ProfileType = {
     aboutMe: string
-    contacts: {
-        facebook: null | string
-        website: null | string
-        vk: null | string
-        twitter: null | string
-        instagram: null | string
-        youtube: null | string
-        github: null | string
-        mainLink: null | string
-    }
+    contacts: ContactsType
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
@@ -23,8 +14,21 @@ export type ProfileType = {
     }
 }
 
-const initialState: ProfilePageType = {
-    profile: null,
+export type ContactsType = {
+    facebook:  string
+    website:  string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+
+type InitialStateType = typeof initialState
+
+const initialState = {
+    profile: null as ProfileType | null,
     messageForNewPost: '',
     status: '',
     posts: [
@@ -35,7 +39,7 @@ const initialState: ProfilePageType = {
     ]
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
+export const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'PROFILE/ADD-POST':
             return {
