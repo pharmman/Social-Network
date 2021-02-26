@@ -36,13 +36,13 @@ const ProfileInfoForm: React.FC<InjectedFormProps<ProfileType,
                 </div>
                 }
                 <h4>About me: {createField('About me', 'aboutMe', Input, 'text', [])}</h4>
+                <h4 style={{cursor: 'pointer', display: 'inline-block'}}
+                    onClick={onClickContactsHandler}>CONTACTS:</h4>
                 {accordionMode &&
                 Object.keys(profile.contacts).map((key: string, index) => {
                     return <Contact key={index} title={key}
-                                    value={createField(key, `contats.${key}`, Input, 'text')}/>
+                                    value={createField(key, `contacts.${key}`, Input, 'text')}/>
                 })}
-                <h4 style={{cursor: 'pointer', display: 'inline-block'}}
-                    onClick={onClickContactsHandler}>CONTACTS:</h4>
                 <h4>Looking for a
                     Job: {createField(null, 'lookingForAJob', Input, 'checkbox', null)}</h4>
                 <h4>Looking For A Job

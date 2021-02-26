@@ -4,7 +4,6 @@ import React from 'react';
 
 type ProfileInfoDataType = {
     profile: ProfileType
-    editMode: boolean
     setEditMode: (value: boolean) => void
     isOwner: boolean
     accordionMode: boolean
@@ -13,7 +12,6 @@ type ProfileInfoDataType = {
 
 export const ProfileInfoData: React.FC<ProfileInfoDataType> = ({
                                                                    setEditMode,
-                                                                   editMode,
                                                                    profile,
                                                                    isOwner,
                                                                    setAccordionMode,
@@ -21,6 +19,7 @@ export const ProfileInfoData: React.FC<ProfileInfoDataType> = ({
                                                                }) => {
     const onClickHandler = () => {
         setEditMode(true)
+        setAccordionMode(true)
     }
 
     const onClickContactsHandler = () => {
@@ -29,7 +28,7 @@ export const ProfileInfoData: React.FC<ProfileInfoDataType> = ({
 
     return (
         <>
-            {<button onClick={onClickHandler}>edit</button>}
+            {isOwner && <button onClick={onClickHandler}>edit</button>}
             <h4>About me: {profile.aboutMe}</h4>
             <h4 style={{cursor: 'pointer', display: 'inline-block'}}
                 onClick={onClickContactsHandler}>CONTACTS:</h4>

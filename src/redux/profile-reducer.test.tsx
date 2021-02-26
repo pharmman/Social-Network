@@ -1,7 +1,7 @@
 import {ProfilePageType} from './store';
 import {addPostActionCreator, deletePost, profileReducer, setProfileStatus} from './profile-reducer';
 
-let state:ProfilePageType;
+let state:ProfilePageType
 
 beforeEach(() => {
     state = {

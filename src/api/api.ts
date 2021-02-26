@@ -79,7 +79,7 @@ export const followAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userId: string) {
+    getProfile(userId: string | number) {
         return instance.get<ProfileResponseType>(`profile/${userId}`)
             .then(response => {
                 return response.data

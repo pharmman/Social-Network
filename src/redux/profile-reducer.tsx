@@ -1,6 +1,8 @@
 import {ActionsType, ThunkType} from './store';
 import {profileAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
+import {ThunkAction} from 'redux-thunk';
+import {StateType} from './redux-store';
 
 export type ProfileType = {
     aboutMe: string
@@ -116,7 +118,7 @@ export const getProfileStatus = (userId: string): ThunkType => async (dispatch) 
     dispatch(setProfileStatus(data))
 }
 
-export const getUserProfile = (userId: string) => (dispatch: (action: ActionsType) => void) => {
+export const getUserProfile = (userId: string | number):ThunkType => (dispatch)  => {
     profileAPI.getProfile(userId)
         .then(data => {
             dispatch(setUserProfile(data))
@@ -137,8 +139,8 @@ export const updateProfilePhoto = (file: File): ThunkType => async (dispatch) =>
     }
 }
 
-export const updateProfile = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
-    const userId = getState().profilePage.profile?.userId
+export const updateProfile = (profile: ProfileType):ThunkAction<Promise<any>, StateType, unknown, ActionsType> => async (dispatch, getState) => {
+    let userId = getState().profilePage.profile?.userId
     const data = await profileAPI.updateProfile(profile)
     if (data.resultCode === 0) {
         if (userId) {
@@ -147,5 +149,6 @@ export const updateProfile = (profile: ProfileType): ThunkType => async (dispatc
     }
     else {
         dispatch(stopSubmit('edit-profile', {_error: data.messages[0]}))
+        return Promise.reject(data.messages[0])
     }
 }

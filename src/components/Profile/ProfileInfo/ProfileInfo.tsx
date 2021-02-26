@@ -12,7 +12,7 @@ type ProfileInfoPropsType = {
     status: string
     isOwner: boolean
     updateProfilePhoto: (photo: File) => void
-    updateProfile: (profile: ProfileType) => void
+    updateProfile: (profile: ProfileType) => Promise<any>
 }
 
 export type ProfileFormDataType = {
@@ -37,9 +37,10 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
     }
 
     const onSubmit = (formData: ProfileType) => {
-        console.log(formData)
-        props.updateProfile(formData)
-        // setEditMode(!editMode)
+        props.updateProfile(formData).then(() => {
+            setEditMode(!editMode)
+            setAccordionMode(false)
+        })
     }
 
     return (
@@ -66,10 +67,10 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             <div className={classes.description}>
                 {
                     props.isOwner && editMode ?
-                        <ProfileInfoForm profile={props.profile} onSubmit={onSubmit} accordionMode={accordionMode}
+                        <ProfileInfoForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} accordionMode={accordionMode}
                                          setAccordionMode={setAccordionMode} />
                         :
-                        <ProfileInfoData profile={props.profile} editMode={editMode} setEditMode={setEditMode}
+                        <ProfileInfoData profile={props.profile} setEditMode={setEditMode}
                                          isOwner={props.isOwner} accordionMode={accordionMode}
                                          setAccordionMode={setAccordionMode}/>
                 }

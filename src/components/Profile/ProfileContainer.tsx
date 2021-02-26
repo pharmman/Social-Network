@@ -26,7 +26,7 @@ type MapDispatchToPropsType = {
     updateProfileStatus: (status: string) => void
     updateProfilePhoto: (file: File) => void,
     getProfileStatus: (userId: string) => void
-    updateProfile: (profile:ProfileType) => void
+    updateProfile: (profile:ProfileType) => any
 }
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType;

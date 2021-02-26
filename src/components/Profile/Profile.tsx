@@ -4,7 +4,7 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ProfileType} from '../../redux/profile-reducer';
 
 type ProfilePropsType = {
-    updateProfile: (profile:ProfileType) => void
+    updateProfile: (profile: ProfileType) => Promise<any>
     profile: ProfileType | null
     updateProfileStatus: (status: string) => void
     updateProfilePhoto: (photo:File) => void
