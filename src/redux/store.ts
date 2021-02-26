@@ -16,7 +16,7 @@ import {
     ToggleFollowingProgressType,
     UnfollowType
 } from './users-reducer';
-import {SetAuthDataType} from './auth-reducer';
+import {SetAuthDataType, SetCaptchaUrlType} from './auth-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {StateType} from './redux-store';
 import {AppReducerActionsType} from './app-reducer';
@@ -71,6 +71,7 @@ export type ActionsType =
     | DeletePostType
     | UpdatePhotoType
     | UpdateProfileType
+    | SetCaptchaUrlType
 
 
 export type ThunkType = ThunkAction<void, StateType, unknown, ActionsType>

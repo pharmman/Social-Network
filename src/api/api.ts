@@ -124,11 +124,12 @@ export const authAPI = {
                 return response.data
             })
     },
-    login(email: string, password: string, rememberMe: boolean) {
+    login(email: string, password: string, rememberMe: boolean, captcha:string) {
         return instance.post<AuthMeResponseType<{ userId: number }>>('auth/login', {
             email,
             password,
             rememberMe,
+            captcha
         })
             .then(response => {
                 return response.data
@@ -136,6 +137,12 @@ export const authAPI = {
     },
     logOut() {
         return instance.delete<AuthMeResponseType<Object>>('auth/login',)
+            .then(response => {
+                return response.data
+            })
+    },
+    getCaptchaUrl() {
+        return instance.get<{url:string}>('security/get-captcha-url')
             .then(response => {
                 return response.data
             })
