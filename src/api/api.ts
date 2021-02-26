@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {UserType} from '../redux/users-reducer';
+import {ProfileType} from '../redux/profile-reducer';
 
 type GetUsersResponseType = {
     items: UserType[]
@@ -104,6 +105,12 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+            .then(response => {
+                return response.data
+            })
+    },
+    updateProfile(profile:ProfileType) {
+        return instance.put<ResponseType>('profile', {...profile})
             .then(response => {
                 return response.data
             })

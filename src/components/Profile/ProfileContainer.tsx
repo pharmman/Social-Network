@@ -3,7 +3,7 @@ import {Profile} from './Profile';
 import {
     getProfileStatus,
     getUserProfile,
-    ProfileType,
+    ProfileType, updateProfile,
     updateProfilePhoto,
     updateProfileStatus
 } from '../../redux/profile-reducer';
@@ -26,6 +26,7 @@ type MapDispatchToPropsType = {
     updateProfileStatus: (status: string) => void
     updateProfilePhoto: (file: File) => void,
     getProfileStatus: (userId: string) => void
+    updateProfile: (profile:ProfileType) => void
 }
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType;
@@ -67,10 +68,11 @@ class ProfileContainer extends React.Component<ProfileContainerType, StateType> 
                 <Profile
                     {...this.props}
                     updateProfilePhoto={this.props.updateProfilePhoto}
+                    updateProfile={this.props.updateProfile}
                     status={this.props.status}
                     profile={this.props.profile}
                     updateProfileStatus={this.props.updateProfileStatus}
-                         owner={!!this.props.match.params.userId}/>
+                    isOwner={!this.props.match.params.userId}/>
             </>
         )
     }
@@ -93,7 +95,8 @@ export default compose<React.ComponentType>(
         getUserProfile,
         updateProfileStatus,
         getProfileStatus,
-        updateProfilePhoto
+        updateProfilePhoto,
+        updateProfile
     }))(ProfileContainer)
 
 

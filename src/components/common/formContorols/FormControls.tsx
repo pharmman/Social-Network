@@ -31,8 +31,8 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
 }
 
 export const createField = (placeholder: string | null, name: string, component: FC<WrappedFieldProps>, type: string ,validators: any = [], text = '') => {
-    return <div>
+    return <>
         <Field type={type} validate={validators} placeholder={placeholder} name={name} component={component}/>
         <span>{text}</span>
-    </div>
+    </>
 }

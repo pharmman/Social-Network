@@ -1,21 +1,30 @@
 import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css'
-import {ContactsType, ProfileType} from '../../../redux/profile-reducer';
+import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
-import {Contact} from './Contact/Contact';
 import {ProfileStatusWithHooks} from './ProfileStatusWithHook';
-import {createField, Input, Textarea} from '../../common/formContorols/FormControls';
+import {ProfileInfoData} from './ProfileInfoData';
+import ProfileInfoForm from './ProfileInfoForm';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
     updateProfileStatus: (status: string) => void
     status: string
-    owner: boolean
+    isOwner: boolean
     updateProfilePhoto: (photo: File) => void
+    updateProfile: (profile: ProfileType) => void
+}
+
+export type ProfileFormDataType = {
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
 }
 
 
 export function ProfileInfo(props: ProfileInfoPropsType) {
+    const [editMode, setEditMode] = useState<boolean>(false)
     const [accordionMode, setAccordionMode] = useState<boolean>(false)
 
     const handleChange = (selectorFiles: FileList | null) => {
@@ -27,8 +36,11 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
         return <Preloader/>
     }
 
-    // const temp:ContactsKeys[] = Object.keys(props.profile.contacts)
-    const contactsTemp: { [key: string]: string | null } = props.profile.contacts
+    const onSubmit = (formData: ProfileType) => {
+        console.log(formData)
+        props.updateProfile(formData)
+        // setEditMode(!editMode)
+    }
 
     return (
         <div className={classes.profile}>
@@ -42,9 +54,9 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                                                        alt=""/> :
                         <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'}
                              alt={''}/>}
-                    {props.owner ?
-                        <></>
-                        :
+                    {
+                        props.isOwner
+                        &&
                         <input type={'file'} onChange={(e) => handleChange(e.target.files)}/>
                     }
                     <ProfileStatusWithHooks updateProfileStatus={props.updateProfileStatus}
@@ -52,44 +64,16 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                 </div>
             </div>
             <div className={classes.description}>
-
+                {
+                    props.isOwner && editMode ?
+                        <ProfileInfoForm profile={props.profile} onSubmit={onSubmit} accordionMode={accordionMode}
+                                         setAccordionMode={setAccordionMode} />
+                        :
+                        <ProfileInfoData profile={props.profile} editMode={editMode} setEditMode={setEditMode}
+                                         isOwner={props.isOwner} accordionMode={accordionMode}
+                                         setAccordionMode={setAccordionMode}/>
+                }
             </div>
-        </div>
-    )
-}
-
-export const ProfileInfoData = () => {
-    return(
-        <>
-            <h4>About me: {props.profile?.aboutMe}</h4>
-            <h4 style={{cursor: 'pointer', display: 'inline-block'}}
-                onClick={() => setAccordionMode(!accordionMode)}>CONTACTS:</h4>
-            {accordionMode &&
-            Object.keys(props.profile.contacts).map((key: string, index) => {
-                return <Contact contacts={props.profile?.contacts} key={index} title={key}
-                                value={props.profile?.contacts[key as keyof ContactsType]}/>
-            })}
-            <h4>Looking for a Job: {props.profile?.lookingForAJob ? '🤑' : '🤢'}</h4>
-            <h4>Looking For A Job Description: {props.profile?.lookingForAJobDescription}</h4>
-            <h4>Full name: {props.profile?.fullName}</h4>
-        </>
-    )
-}
-
-export const ProfileInfoForm = () => {
-    return (
-        <div>
-            <form>
-                <button>save</button>
-                <h4>About me: {createField('About me', 'aboutMe', Input, 'text')}</h4>
-                <h4 style={{cursor: 'pointer', display: 'inline-block'}}
-                    onClick={() => props.setAccordionMode(!props.accordionMode)}>CONTACTS:</h4>
-                <h4>Looking for a
-                    Job: {createField('', 'lookingJob', Input, 'checkbox', null, 'Looking for a job')}</h4>
-                <h4>Looking For A Job
-                    Description: {createField('Looking For A Job Description', 'jobDescription', Textarea, 'text')}</h4>
-                <h4>Full name: {createField('Full name', 'fullName', Input, 'text')}</h4>
-            </form>
         </div>
     )
 }

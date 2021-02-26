@@ -4,8 +4,7 @@ import {ContactsType} from '../../../../redux/profile-reducer';
 
 type ContactsPropsType = {
     title: string
-    value: string | null | undefined
-    contacts: any
+    value: any
 }
 
 

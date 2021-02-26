@@ -4,7 +4,7 @@ import {
     ProfileType,
     SetProfileStatusType,
     SetProfileType,
-    UpdatePhotoType
+    UpdatePhotoType, UpdateProfileType
 } from './profile-reducer';
 import {AddNewMessageType} from './dialogs-reducer';
 import {
@@ -70,6 +70,7 @@ export type ActionsType =
     | SetProfileStatusType
     | DeletePostType
     | UpdatePhotoType
+    | UpdateProfileType
 
 
 export type ThunkType = ThunkAction<void, StateType, unknown, ActionsType>
