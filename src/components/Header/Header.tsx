@@ -1,26 +1,74 @@
-import React from 'react';
-import classes from './Header.module.css'
+import React, {useState} from 'react';
+import styles from './Header.module.scss'
 import {HeaderContainerPropsType} from './HeaderContainer';
 import {NavLink} from 'react-router-dom';
+import logo from '../../assets/images/logo.png'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faBars, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
+import ClickAwayListener from 'react-click-away-listener';
 
 type HeaderPropsType = HeaderContainerPropsType
 
 export function Header(props: HeaderPropsType) {
-
     const logOut = () => {
         props.logOutTC()
     }
 
+    const [menuIsShowing, setShowMenu] = useState(false)
+
+    const menuHandler = () => {
+        setShowMenu(!menuIsShowing)
+    }
+
+    const handleClickAway = () => {
+        if (menuIsShowing) {
+            setShowMenu(false)
+        }
+    };
+
     return (
-        <header className={classes.header}>
-            <img className={classes.header__logo}
-                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/The_social_network.svg/1280px-The_social_network.svg.png"
-                 alt="logo"/>
-            <div className={classes.login}>
+        <header className={styles.header}>
+            <div className={styles.leftSide}>
+                <div className={styles.burgerMenu}><FontAwesomeIcon onClick={logOut} icon={faBars} size={'lg'}/></div>
+                <div className={styles.headerLogoContainer}>
+                    <NavLink to={'/'}><img className={styles.headerLogo}
+                                           src={logo}
+                                           alt="logo"/></NavLink>
+                </div>
+            </div>
+            <div className={styles.rightSide}>
+
                 {props.isAuth
-                    ? <div>{props.login} - <button onClick={logOut}>LogOut</button> </div>
+                    ?
+                    <div className={styles.loginMenu}>
+                        <div className={styles.loginButton}>
+                            <FontAwesomeIcon onClick={logOut} icon={faSignOutAlt} size={'lg'}/>
+                        </div>
+                        <ClickAwayListener onClickAway={handleClickAway}>
+                            <div className={styles.profileImgContainer}>
+                                <img onClick={menuHandler} className={styles.profileImg} src={props.profilePhoto}
+                                     alt={'Profile'}/>
+
+                                <div className={menuIsShowing ? styles.profileMenuShow : styles.profileMenuHidden}>
+                                    <div className={styles.profileMenuAvatar}>
+                                        <NavLink to={`/profile/:${props.authorizedUserId}?`}>
+                                            <img className={styles.profileMenuImg} src={props.profilePhoto}
+                                                 alt={'Profile'}/>
+                                        </NavLink>
+                                    </div>
+                                        <div className={styles.profileUserName}>
+                                            {props.userName}
+                                    </div>
+                                </div>
+                            </div>
+                        </ClickAwayListener>
+                    </div>
                     :
-                <NavLink to={'/login'}>Login</NavLink>}
+                    <div className={styles.loginButton}>
+                        <NavLink to={'/login'}><FontAwesomeIcon icon={faSignInAlt} size={'lg'}/></NavLink>
+                    </div>
+
+                }
             </div>
         </header>
 

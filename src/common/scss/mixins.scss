@@ -1,0 +1,35 @@
+@import "variables";
+
+
+@mixin container() {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  //@media screen and (max-width: 310px) {
+  //  width: 100%;
+  //}
+  @media screen and(max-width: 500px) {
+    justify-content: center;
+  }
+}
+
+@mixin text($fontFamily, $fontSize, $lineHeight, $fontWeight) {
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  line-height: $lineHeight;
+  font-weight: $fontWeight;
+}
+
+@mixin flex($direction, $justifyContent, $alignItems, $wrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-wrap: $wrap;
+}
+
+@mixin bgSettings() {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

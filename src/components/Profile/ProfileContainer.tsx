@@ -52,7 +52,6 @@ class ProfileContainer extends React.Component<ProfileContainerType, StateType> 
 
     componentDidMount() {
         this.renderProfile()
-
     }
 
     componentDidUpdate(prevProps: Readonly<ProfileContainerType>, prevState: Readonly<StateType>, snapshot?: any) {

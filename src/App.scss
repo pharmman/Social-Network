@@ -1,0 +1,31 @@
+@import "./common/scss/variables";
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    font-family: $primaryFont;
+    color: #333
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.app-wrapper {
+    max-width: 1200px;
+    margin-top: 300px;
+    color: white;
+}
+
+.app-inner {
+    display: flex;
+    margin-top: 10px;
+}
+
+.app-inner-content {
+    background-color: #405898;
+    max-width: 1000px;
+}
