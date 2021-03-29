@@ -1,0 +1,6 @@
+@import "../../../common/scss/mixins";
+
+.text {
+    @include text($primaryFont, 72px, 40px, 700);
+    text-align: center;
+}

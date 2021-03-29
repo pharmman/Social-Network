@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import {Navbar} from './components/Navbar/Navbar';
-import {Route, withRouter, Switch, Redirect} from 'react-router-dom';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import {connect} from 'react-redux';
@@ -11,6 +11,10 @@ import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
 import {compose} from 'redux';
 import {withSuspense} from './hoc/ComponentWithSuspense';
+import {ConstructionPage} from './components/common/ConstructionPage/ConstructionPage';
+import {News} from './components/News/News';
+import {Settings} from './components/Settings/Settings';
+import {Music} from './components/Music/Music';
 
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const DialogsContainer = React.lazy(() => import ('./components/Dialogs/DialogsContainer'));
@@ -54,6 +58,9 @@ class App extends React.Component<AppPropsType, StateType> {
                             <Route exact path={'/'} render={() => <Redirect to={'/login'}/>}/>
                             <Route exact path={'/Social-Network'} render={() => <Redirect to={'/login'}/>}/>
                             <Route path={'/dialogs'} render={withSuspense(DialogsContainer)}/>
+                            <Route path={'/news'} render={() => <News/>}/>
+                            <Route path={'/settings'} render={() => <Settings/>}/>
+                            <Route path={'/music'} render={() => <Music/>}/>
                             <Route path={'/profile/:userId?'}
                                    render={withSuspense(ProfileContainer)}/>
                             <Route path={'/users'}
