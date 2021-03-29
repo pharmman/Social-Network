@@ -22,6 +22,7 @@
     width: 188px;
 
     .burgerMenu {
+      display: none;
       @media screen and (max-width: 600px) {
         font-size: 32px;
       }

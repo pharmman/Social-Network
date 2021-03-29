@@ -47,24 +47,22 @@ class App extends React.Component<AppPropsType, StateType> {
         return (
             <div>
                 <HeaderContainer/>
-                <div className={'app-wrapper'}>
-                    <div className={'app-inner'}>
-                        <Navbar/>
-                        <div className={'app-inner-content'}>
-                            <Switch>
-                                <Route exact path={'/'} render={() => <Redirect to={'/login'}/>}/>
-                                <Route exact path={'/Social-Network'} render={() => <Redirect to={'/login'}/>}/>
-                                <Route path={'/dialogs'} render={withSuspense(DialogsContainer)}/>
-                                <Route path={'/profile/:userId?'}
-                                       render={withSuspense(ProfileContainer)}/>
-                                <Route path={'/users'}
-                                       render={withSuspense(UsersContainer)}/>
-                                <Route path={'/login'}
-                                       render={() => <Login/>}/>
-                                <Route path={'*'} render={() => <Redirect to={'/404'}/>}/>
-                                <Route path={'404'} render={() => <h1>Page not found</h1>}/>
-                            </Switch>
-                        </div>
+                <div className={'appWrapper'}>
+                <Navbar/>
+                    <div className={'appMain'}>
+                        <Switch>
+                            <Route exact path={'/'} render={() => <Redirect to={'/login'}/>}/>
+                            <Route exact path={'/Social-Network'} render={() => <Redirect to={'/login'}/>}/>
+                            <Route path={'/dialogs'} render={withSuspense(DialogsContainer)}/>
+                            <Route path={'/profile/:userId?'}
+                                   render={withSuspense(ProfileContainer)}/>
+                            <Route path={'/users'}
+                                   render={withSuspense(UsersContainer)}/>
+                            <Route path={'/login'}
+                                   render={() => <Login/>}/>
+                            <Route path={'*'} render={() => <Redirect to={'/404'}/>}/>
+                            <Route path={'404'} render={() => <h1>Page not found</h1>}/>
+                        </Switch>
                     </div>
                 </div>
             </div>

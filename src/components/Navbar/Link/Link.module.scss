@@ -1,0 +1,52 @@
+.link {
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  line-height: 25px;
+  font-size: 16px;
+  border-radius: 10px;
+  color: #333;
+  &:hover {
+    background-color: #F1F3F4;
+  }
+
+ a {
+  color: #585757;
+  display: block;
+  padding: 11px 12px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  width: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+   svg {
+     width: 26px;
+     height: 26px;
+     border-radius: 100%;
+     margin-right: 10px;
+   }
+}
+}
+
+
+.activeLink {
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  line-height: 25px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #2a41e8;
+  color: white;
+
+  &:nth-child(1) {
+    color: white;
+  }
+}
+

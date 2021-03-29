@@ -56,8 +56,8 @@ export function Header(props: HeaderPropsType) {
                                                  alt={'Profile'}/>
                                         </NavLink>
                                     </div>
-                                        <div className={styles.profileUserName}>
-                                            {props.userName}
+                                    <div className={styles.profileUserName}>
+                                        {props.userName}
                                     </div>
                                 </div>
                             </div>

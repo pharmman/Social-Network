@@ -1,32 +1,29 @@
 import React from 'react';
-import classes from './Navbar.module.css'
-import {NavLink} from 'react-router-dom';
+import classes from './Navbar.module.scss'
+import {Link} from './Link/Link';
+import {
+    faCog,
+    faEnvelope,
+    faIdCard,
+    faMusic,
+    faNewspaper,
+    faSignInAlt,
+    faUsers
+} from '@fortawesome/free-solid-svg-icons';
 
 
 export function Navbar() {
     return (
         <nav className={classes.navbar}>
-            <div className={classes.navbar__item}>
-                <NavLink to={'/profile'} activeClassName={classes.active}>Profile</NavLink>
-            </div>
-            <div className={classes.navbar__item}>
-                <NavLink to={'/dialogs'} activeClassName={classes.active}>Messages</NavLink>
-            </div>
-            <div className={classes.navbar__item}>
-                <a href={'/dialogs'}>News</a>
-            </div>
-            <div className={classes.navbar__item}>
-                <a href={'/dialogs'}>Music</a>
-            </div>
-            <div className={classes.navbar__item}>
-                <a href={'/dialogs'}>Settings</a>
-            </div>
-            <div className={classes.navbar__item}>
-                <NavLink to={'/users'} activeClassName={classes.active}>Users</NavLink>
-            </div>
-            <div className={classes.navbar__item}>
-                <NavLink to={'/login'} activeClassName={classes.active}>Login</NavLink>
-            </div>
+            <ul>
+                <Link linkName={'Profile'} link={'/profile'} icon={faIdCard}/>
+                <Link linkName={'Messages'} link={'/dialogs'} icon={faEnvelope}/>
+                <Link linkName={'News'} link={'/news'} icon={faNewspaper}/>
+                <Link linkName={'Music'} link={'/music'} icon={faMusic}/>
+                <Link linkName={'Settings'} link={'/settings'} icon={faCog}/>
+                <Link linkName={'Users'} link={'/users'} icon={faUsers}/>
+                <Link linkName={'Login'} link={'/login'} icon={faSignInAlt}/>
+            </ul>
         </nav>
     )
 }
