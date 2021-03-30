@@ -11,7 +11,6 @@ import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
 import {compose} from 'redux';
 import {withSuspense} from './hoc/ComponentWithSuspense';
-import {ConstructionPage} from './components/common/ConstructionPage/ConstructionPage';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Music} from './components/Music/Music';

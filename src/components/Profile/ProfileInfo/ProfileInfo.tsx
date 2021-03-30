@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import classes from './ProfileInfo.module.css'
+import styles from './ProfileInfo.module.scss'
 import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileStatusWithHooks} from './ProfileStatusWithHook';
 import {ProfileInfoData} from './ProfileInfoData';
 import ProfileInfoForm from './ProfileInfoForm';
+import profileCover from '../../../assets/images/profile-cover.jpg'
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -44,17 +45,22 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
     }
 
     return (
-        <div className={classes.profile}>
-            <div className={classes.profile__img}>
-                <div className={classes.profile__imgLogo}>
-                    <img src="https://www.ixbt.com/img/n1/news/2019/7/5/dims_3_large.jpg"
-                         alt=""/>
+        <div className={styles.profile}>
+            <div className={styles.profileBanner}>
+                <img src={profileCover} alt={'profile cover'}/>
+            </div>
+            <div className={styles.profileContent}>
+                <div className={styles.profileAvatar}>
+                    <div className={styles.profileAvatarHolder}>
+                        {props.profile.photos.large ? <img src={props.profile.photos.large}
+                                                           alt=""/> :
+                            <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'}
+                                 alt={''}/>}
+                    </div>
                 </div>
+            </div>
+            <div className={styles.profile__img}>
                 <div>
-                    {props.profile.photos.large ? <img src={props.profile.photos.large}
-                                                       alt=""/> :
-                        <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'}
-                             alt={''}/>}
                     {
                         props.isOwner
                         &&
@@ -64,7 +70,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                                             propsStatus={props.status || '-----'}/>
                 </div>
             </div>
-            <div className={classes.description}>
+            <div className={styles.description}>
                 {
                     props.isOwner && editMode ?
                         <ProfileInfoForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} accordionMode={accordionMode}
