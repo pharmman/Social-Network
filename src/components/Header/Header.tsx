@@ -67,7 +67,6 @@ export function Header(props: HeaderPropsType) {
                     <div className={styles.loginButton}>
                         <NavLink to={'/login'}><FontAwesomeIcon icon={faSignInAlt} size={'lg'}/></NavLink>
                     </div>
-
                 }
             </div>
         </header>

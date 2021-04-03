@@ -6,6 +6,7 @@ import {ProfileStatusWithHooks} from './ProfileStatusWithHook';
 import {ProfileInfoData} from './ProfileInfoData';
 import ProfileInfoForm from './ProfileInfoForm';
 import profileCover from '../../../assets/images/profile-cover.jpg'
+import avatar from '../../../assets/images/no-avatar.png'
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -54,15 +55,13 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                     <div className={styles.profileAvatarHolder}>
                         {props.profile.photos.large ? <img src={props.profile.photos.large}
                                                            alt=""/> :
-                            <img src={'https://i.pinimg.com/originals/3f/c3/11/3fc3111809a18f70a9f1ccbea7e1ade6.jpg'}
-                                 alt={''}/>}
+                            <img src={avatar} alt={'avatar'}/>}
                     </div>
                 </div>
             </div>
             <div className={styles.profile__img}>
                 <div>
-                    {
-                        props.isOwner
+                    {props.isOwner
                         &&
                         <input type={'file'} onChange={(e) => handleChange(e.target.files)}/>
                     }

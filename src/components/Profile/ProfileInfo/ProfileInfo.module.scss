@@ -1,4 +1,4 @@
-
+@import "../../../common/scss/mixins";
 .profile {
     .profileBanner {
         height: 285px;
@@ -12,6 +12,7 @@
         }
     }
     .profileContent {
+        @include flex(row, center, center, nowrap);
         .profileAvatar {
             width: 160px;
             height: 160px;
@@ -23,8 +24,6 @@
                 width: 100%;
                 height: 100%;
                 border-radius: 100%;
-                //-webkit-box-shadow: 0 2px 20px 0 rgb(0 0 0 / 30%);
-                //box-shadow: 0 2px 20px 0 rgb(0 0 0 / 30%);
                 border: 4px solid #FFF;
                 overflow: hidden;
                 background: #dcdcdc;

@@ -39,7 +39,7 @@ const ProfileInfoForm: React.FC<InjectedFormProps<ProfileType,
                 <h4 style={{cursor: 'pointer', display: 'inline-block'}}
                     onClick={onClickContactsHandler}>CONTACTS:</h4>
                 {accordionMode &&
-                Object.keys(profile.contacts).map((key: string, index) => {
+                Object.keys(profile.contacts).map((key, index) => {
                     return <Contact key={index} title={key}
                                     value={createField(key, `contacts.${key}`, Input, 'text')}/>
                 })}
