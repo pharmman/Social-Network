@@ -52,7 +52,11 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             </div>
             <div className={styles.profileContent}>
                 <div className={styles.profileAvatar}>
+
                     <div className={styles.profileAvatarHolder}>
+                        <div className={styles.avatarMenu}>
+                            <span>Change avatar</span>
+                        </div>
                         {props.profile.photos.large ? <img src={props.profile.photos.large}
                                                            alt=""/> :
                             <img src={avatar} alt={'avatar'}/>}
