@@ -54,9 +54,14 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                 <div className={styles.profileAvatar}>
 
                     <div className={styles.profileAvatarHolder}>
+                        {props.isOwner
+                        &&
                         <div className={styles.avatarMenu}>
-                            <span>Change avatar</span>
+                            <label htmlFor={'fileUpload'}>Change avatar</label>
+                            <input id={'fileUpload'} type={'file'} onChange={(e) => handleChange(e.target.files)}/>
                         </div>
+                        }
+
                         {props.profile.photos.large ? <img src={props.profile.photos.large}
                                                            alt=""/> :
                             <img src={avatar} alt={'avatar'}/>}
@@ -65,10 +70,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             </div>
             <div className={styles.profile__img}>
                 <div>
-                    {props.isOwner
-                        &&
-                        <input type={'file'} onChange={(e) => handleChange(e.target.files)}/>
-                    }
+
                     <ProfileStatusWithHooks updateProfileStatus={props.updateProfileStatus}
                                             propsStatus={props.status || '-----'}/>
                 </div>
