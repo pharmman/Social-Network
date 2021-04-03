@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import {RouteComponentProps} from 'react-router'
 import {compose} from 'redux';
+import {Preloader} from '../common/Preloader/Preloader';
 
 type PathParamsType = {
     userId: string
@@ -26,7 +27,7 @@ type MapDispatchToPropsType = {
     updateProfileStatus: (status: string) => void
     updateProfilePhoto: (file: File) => void,
     getProfileStatus: (userId: string) => void
-    updateProfile: (profile:ProfileType) => any
+    updateProfile: (profile: ProfileType) => any
 }
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType;
@@ -37,13 +38,13 @@ class ProfileContainer extends React.Component<ProfileContainerType, StateType> 
         let userId: string
         if (this.props.match.params.userId) {
             userId = this.props.match.params.userId
-            this.props.getUserProfile(userId)
             this.props.getProfileStatus(userId)
+            this.props.getUserProfile(userId)
         }
         if (!this.props.match.params.userId && this.props.authorizedUserId) {
             userId = this.props.authorizedUserId.toString()
-            this.props.getUserProfile(userId)
             this.props.getProfileStatus(userId)
+            this.props.getUserProfile(userId)
         }
         if (!this.props.match.params.userId && !this.props.authorizedUserId) {
             this.props.history.push('/login')

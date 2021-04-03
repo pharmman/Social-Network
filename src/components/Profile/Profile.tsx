@@ -21,7 +21,7 @@ export function Profile(props: ProfilePropsType) {
                 updateProfile={props.updateProfile}
                 updateProfilePhoto={props.updateProfilePhoto}
                 updateProfileStatus={props.updateProfileStatus}/>
-            <MyPostsContainer/>
+            {/*<MyPostsContainer/>*/}
         </>
     )
 }

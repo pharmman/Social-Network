@@ -1,14 +1,11 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
+import styles from './ProfileStatus.module.scss'
 
 type ProfileStatusPropsType = {
     propsStatus: string
     updateProfileStatus: (status: string) => void
 }
 
-type LocalStateType = {
-    editMode: boolean,
-    status: string
-}
 
 export const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = ({propsStatus, updateProfileStatus}) => {
 
@@ -32,13 +29,17 @@ export const ProfileStatusWithHooks: React.FC<ProfileStatusPropsType> = ({propsS
         setEditMode(true)
     }
 
+    const clearStatus = () => {
+        setStatus('')
+    }
+
     return (
-        <div>
+        <div className={styles.profileStatus}>
             {editMode ?
-                <input onChange={onchangeHandler} value={status} autoFocus={true}
+                <input placeholder={'Add...'} className={styles.form} onFocus={clearStatus} onChange={onchangeHandler} value={status} autoFocus={true}
                        onBlur={deActivateEditMod}/>
                 :
-                <span onDoubleClick={activateEditMod}>{propsStatus}</span>}
+                <p className={styles.data} onDoubleClick={activateEditMod}>{propsStatus}</p>}
         </div>
     )
 }

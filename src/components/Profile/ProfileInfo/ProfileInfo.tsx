@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './ProfileInfo.module.scss'
 import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
-import {ProfileStatusWithHooks} from './ProfileStatusWithHook';
+import {ProfileStatusWithHooks} from './PorfileStatus/ProfileStatusWithHook';
 import {ProfileInfoData} from './ProfileInfoData';
 import ProfileInfoForm from './ProfileInfoForm';
 import profileCover from '../../../assets/images/profile-cover.jpg'
@@ -34,15 +34,17 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             props.updateProfilePhoto(selectorFiles[0])
         }
     }
-    if (!props.profile) {
-        return <Preloader/>
-    }
+
 
     const onSubmit = (formData: ProfileType) => {
         props.updateProfile(formData).then(() => {
             setEditMode(!editMode)
             setAccordionMode(false)
         })
+    }
+
+    if (!props.profile) {
+        return <Preloader/>
     }
 
     return (
@@ -52,7 +54,6 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             </div>
             <div className={styles.profileContent}>
                 <div className={styles.profileAvatar}>
-
                     <div className={styles.profileAvatarHolder}>
                         {props.isOwner
                         &&
@@ -61,18 +62,17 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                             <input id={'fileUpload'} type={'file'} onChange={(e) => handleChange(e.target.files)}/>
                         </div>
                         }
-
                         {props.profile.photos.large ? <img src={props.profile.photos.large}
                                                            alt=""/> :
                             <img src={avatar} alt={'avatar'}/>}
                     </div>
                 </div>
-            </div>
-            <div className={styles.profile__img}>
-                <div>
-
-                    <ProfileStatusWithHooks updateProfileStatus={props.updateProfileStatus}
-                                            propsStatus={props.status || '-----'}/>
+                <div className={styles.profileInfo}>
+                    <h1>{props.profile.fullName}</h1>
+                    {props.isOwner? <ProfileStatusWithHooks updateProfileStatus={props.updateProfileStatus}
+                                                            propsStatus={props.status || 'Add...'}/>
+                    :
+                    <p className={styles.profileStatus}>{props.status || 'Add...'}</p>}
                 </div>
             </div>
             <div className={styles.description}>

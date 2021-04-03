@@ -16,7 +16,7 @@
   }
 
   .profileContent {
-    @include flex(row, center, center, nowrap);
+    @include flex(column, center, center, nowrap);
 
     .profileAvatar {
       width: 160px;
@@ -77,6 +77,12 @@
         object-fit: cover;
         vertical-align: middle;
       }
+    }
+    .profileStatus {
+      font-size: 15px;
+      line-height: 27px;
+      color: #9c9c9c;
+      text-align: center;
     }
   }
 }
