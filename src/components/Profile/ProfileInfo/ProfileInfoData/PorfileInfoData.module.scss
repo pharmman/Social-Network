@@ -3,17 +3,28 @@
 .aboutSection {
   cursor: default;
   .title {
-    //position: relative;
     margin-bottom: 0.75rem;
     color: $primaryFontColor;
     font-size: 24px;
     .editButton {
-      //position: absolute;
-      //left: 80px;
-      //top: 4px;
-      //font-size: 24px;
+      display: inline-block;
       cursor: pointer;
-
+      padding-right: 5px;
     }
+    }
+  .aboutItemsBlock {
+    padding: 0;
+    line-height: 2;
+  }
+  .contactsTitle {
+    cursor: pointer;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: $primaryFontColor;
+    font-size: 24px;
+  }
+  .contactsBlock {
+    line-height: 2;
+    padding: 0;
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Contact.module.css'
 
 
 type ContactsPropsType = {
@@ -9,8 +10,8 @@ type ContactsPropsType = {
 
 export const Contact = (props: ContactsPropsType) => {
     return (
-        <div>
-            <h4>{props.title}: {props.value}</h4>
-        </div>
+        <li>
+            <span className={styles.item}>{props.title}: {props.value}</span>
+        </li>
     )
 }

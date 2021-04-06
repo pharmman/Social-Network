@@ -3,7 +3,7 @@ import {createField, Input, Textarea} from '../../../common/formContorols/FormCo
 import {ProfileType} from '../../../../redux/profile-reducer';
 import {InjectedFormProps, reduxForm} from 'redux-form';
 import {required} from '../../../../validators/validators';
-import {Contact} from '../Contact/Contact';
+import {Contact} from './Contact/Contact';
 import styles from '../../../common/formContorols/FormControls.module.css';
 
 type ProfileInfoFormType = {
