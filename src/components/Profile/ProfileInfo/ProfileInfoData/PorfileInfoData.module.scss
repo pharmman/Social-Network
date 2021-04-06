@@ -1,0 +1,19 @@
+@import "../../../../common/scss/variables";
+
+.aboutSection {
+  cursor: default;
+  .title {
+    //position: relative;
+    margin-bottom: 0.75rem;
+    color: $primaryFontColor;
+    font-size: 24px;
+    .editButton {
+      //position: absolute;
+      //left: 80px;
+      //top: 4px;
+      //font-size: 24px;
+      cursor: pointer;
+
+    }
+  }
+}

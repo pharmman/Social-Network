@@ -3,8 +3,8 @@ import styles from './ProfileInfo.module.scss'
 import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileStatusWithHooks} from './PorfileStatus/ProfileStatusWithHook';
-import {ProfileInfoData} from './ProfileInfoData';
-import ProfileInfoForm from './ProfileInfoForm';
+import {ProfileInfoData} from './ProfileInfoData/ProfileInfoData';
+import ProfileInfoForm from './ProfileInfoData/ProfileInfoForm';
 import profileCover from '../../../assets/images/profile-cover.jpg'
 import avatar from '../../../assets/images/no-avatar.png'
 
@@ -69,17 +69,18 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                 </div>
                 <div className={styles.profileInfo}>
                     <h1>{props.profile.fullName}</h1>
-                    {props.isOwner? <ProfileStatusWithHooks updateProfileStatus={props.updateProfileStatus}
-                                                            propsStatus={props.status || 'Add...'}/>
-                    :
-                    <p className={styles.profileStatus}>{props.status || 'Add...'}</p>}
+                    {props.isOwner ? <ProfileStatusWithHooks updateProfileStatus={props.updateProfileStatus}
+                                                             propsStatus={props.status || 'Add...'}/>
+                        :
+                        <p className={styles.profileStatus}>{props.status || 'Add...'}</p>}
                 </div>
             </div>
             <div className={styles.description}>
                 {
                     props.isOwner && editMode ?
-                        <ProfileInfoForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} accordionMode={accordionMode}
-                                         setAccordionMode={setAccordionMode} />
+                        <ProfileInfoForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit}
+                                         accordionMode={accordionMode}
+                                         setAccordionMode={setAccordionMode}/>
                         :
                         <ProfileInfoData profile={props.profile} setEditMode={setEditMode}
                                          isOwner={props.isOwner} accordionMode={accordionMode}

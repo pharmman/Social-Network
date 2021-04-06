@@ -1,6 +1,10 @@
-import {Contact} from './Contact/Contact';
-import {ContactsType, ProfileType} from '../../../redux/profile-reducer';
+import {Contact} from '../Contact/Contact';
+import {ContactsType, ProfileType} from '../../../../redux/profile-reducer';
+import styles from './PorfileInfoData.module.scss'
 import React from 'react';
+import {faPen, faSignOutAlt, faUser} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {AboutMeItem} from './AboutMeItem/AboutMeItem';
 
 type ProfileInfoDataType = {
     profile: ProfileType
@@ -27,9 +31,15 @@ export const ProfileInfoData: React.FC<ProfileInfoDataType> = ({
     }
 
     return (
-        <>
-            {isOwner && <button onClick={onClickHandler}>edit</button>}
-            <h4>About me: {profile.aboutMe}</h4>
+        <section className={styles.aboutSection}>
+            <h4 className={styles.title}>About {isOwner &&
+            <span className={styles.editButton}><FontAwesomeIcon  onClick={onClickHandler} icon={faPen}
+                                   size={'sm'}/></span>}</h4>
+            <ul className={styles.aboutItemsBlock}>
+                <AboutMeItem icon={faUser} description={`About me: ${profile.aboutMe}`}/>
+                <AboutMeItem icon={faUser} description={`Looking for a Job: ${profile.lookingForAJob ? 'Yes' : 'No'}`}/>
+                <AboutMeItem icon={faUser} description={`Work experience: ${profile.lookingForAJobDescription}`}/>
+            </ul>
             <h4 style={{cursor: 'pointer', display: 'inline-block'}}
                 onClick={onClickContactsHandler}>CONTACTS:</h4>
             {accordionMode &&
@@ -37,9 +47,6 @@ export const ProfileInfoData: React.FC<ProfileInfoDataType> = ({
                 return <Contact key={index} title={key}
                                 value={profile.contacts[key as keyof ContactsType]}/>
             })}
-            <h4>Looking for a Job: {profile.lookingForAJob ? '🤑' : '🤢'}</h4>
-            <h4>Looking For A Job Description: {profile.lookingForAJobDescription}</h4>
-            <h4>Full name: {profile.fullName}</h4>
-        </>
+        </section>
     )
 }

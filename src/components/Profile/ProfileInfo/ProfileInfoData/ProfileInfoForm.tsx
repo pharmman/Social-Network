@@ -1,10 +1,10 @@
 import React from 'react';
-import {createField, Input, Textarea} from '../../common/formContorols/FormControls';
-import {ProfileType} from '../../../redux/profile-reducer';
+import {createField, Input, Textarea} from '../../../common/formContorols/FormControls';
+import {ProfileType} from '../../../../redux/profile-reducer';
 import {InjectedFormProps, reduxForm} from 'redux-form';
-import {required} from '../../../validators/validators';
-import {Contact} from './Contact/Contact';
-import styles from '../../common/formContorols/FormControls.module.css';
+import {required} from '../../../../validators/validators';
+import {Contact} from '../Contact/Contact';
+import styles from '../../../common/formContorols/FormControls.module.css';
 
 type ProfileInfoFormType = {
     accordionMode: boolean
