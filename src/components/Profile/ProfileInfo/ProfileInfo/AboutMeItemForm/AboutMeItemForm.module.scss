@@ -1,0 +1,17 @@
+.aboutItem {
+    color: rgb(75,85,99);
+    font-size: 1.25rem;
+    .icon {
+        margin-right: 0.75rem;
+        padding: 0.375rem;
+    }
+}
+
+.aboutItem > div {
+    display: inline-block;
+    font-size: 1.25rem;
+}
+.aboutItem > div > textarea {
+    width: 280px;
+    height: 80px;
+}

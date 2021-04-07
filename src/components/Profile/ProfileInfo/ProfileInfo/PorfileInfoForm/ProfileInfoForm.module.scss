@@ -1,0 +1,35 @@
+@import "../../../../../common/scss/variables";
+
+.title {
+  margin-bottom: 0.75rem;
+  color: $primaryFontColor;
+  font-size: 24px;
+
+  .editButton {
+    display: inline-block;
+    cursor: pointer;
+    padding-right: 5px;
+  }
+}
+
+.aboutItemsBlock {
+  padding: 0;
+  line-height: 2;
+}
+
+.contactsTitle {
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: $primaryFontColor;
+  font-size: 24px;
+}
+
+.contactsBlock {
+  line-height: 2;
+  padding: 0;
+}
+
+.commonError {
+  color: red;
+}

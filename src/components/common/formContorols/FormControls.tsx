@@ -7,14 +7,14 @@ export const FormControl: React.FC<WrappedFieldProps> = (props) => {
     const hasError = meta.touched && meta.error
 
     return (
-        <div>
+        <>
             <div className={hasError ? styles.error : ''}>
                 {props.children}
             </div>
             <div>
                 {hasError && <span className={styles.errorSpan}>{meta.error}</span>}
             </div>
-        </div>
+        </>
     )
 }
 

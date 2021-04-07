@@ -3,8 +3,8 @@ import styles from './ProfileInfo.module.scss'
 import {ProfileType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileStatusWithHooks} from './PorfileStatus/ProfileStatusWithHook';
-import {ProfileInfoData} from './ProfileInfoData/ProfileInfoData';
-import ProfileInfoForm from './ProfileInfoData/ProfileInfoForm';
+import {ProfileInfoData} from './ProfileInfo/ProfileInfoData/ProfileInfoData';
+import ProfileInfoForm from './ProfileInfo/PorfileInfoForm/ProfileInfoForm';
 import profileCover from '../../../assets/images/profile-cover.jpg'
 import avatar from '../../../assets/images/no-avatar.png'
 
@@ -27,7 +27,7 @@ export type ProfileFormDataType = {
 
 export function ProfileInfo(props: ProfileInfoPropsType) {
     const [editMode, setEditMode] = useState<boolean>(false)
-    const [accordionMode, setAccordionMode] = useState<boolean>(false)
+    const [accordionMode, setAccordionMode] = useState<boolean>(true)
 
     const handleChange = (selectorFiles: FileList | null) => {
         if (selectorFiles) {
