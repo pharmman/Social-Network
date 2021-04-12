@@ -7,3 +7,13 @@
     background-color: cornflowerblue;
     color: white;
 }
+
+.title {
+    font-size: 56px;
+    text-align: center;
+}
+
+.dialogsContainer{
+    display: flex;
+    justify-content: space-between;
+}

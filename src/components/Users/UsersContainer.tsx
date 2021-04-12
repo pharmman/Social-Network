@@ -21,16 +21,8 @@ type MapDispatchToPropsType = {
     requestUsers: (currentPage: number, pageSize: number) => void
 }
 
-type MapStateToPropsType = {
-    users: Array<UserType>
-    currentPage: number
-    pageSize: number
-    totalUsersCount: number
-    isFetching: boolean
-    followingInProgress: number[]
-}
-
-type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+type MapStateToPropsType = ReturnType<typeof mapStateToProps>
+export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component<UsersContainerPropsType, StateType> {
     componentDidMount(): void {
@@ -58,7 +50,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType, StateType>
     }
 }
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => {
+const mapStateToProps = (state: StateType) => {
     return {
         users: getUsers(state),
         currentPage: getCurrentPage(state),

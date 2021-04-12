@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserType} from '../../redux/users-reducer';
-import classes from './Users.module.css'
+import styles from './User.module.css'
 import userAvatar from '../../assets/images/userAvatar.jpg'
 import {NavLink} from 'react-router-dom';
 
@@ -12,33 +12,32 @@ export type UserPropsType = {
 }
 
 export const User: React.FC<UserPropsType> = ({user, unFollow, followingInProgress, follow}) => {
-    return <>
-        <div className={classes.avatar__wrapper}>
-            <NavLink to={`/profile/${user.id}`}><img alt={'Avatar'} className={classes.avatar}
-                                                  src={user.photos.small !== null ? user.photos.small : userAvatar}/></NavLink>
+    return <div className={styles.wrapper}>
+        <div className={styles.avatarWrapper}>
+            <NavLink to={`/profile/${user.id}`}><img alt={'Avatar'} className={styles.avatar}
+                                                     src={user.photos.small !== null ? user.photos.small : userAvatar}/></NavLink>
 
             <div>
                 {user.followed ?
                     <button disabled={followingInProgress.some(id => id === user.id)}
                             onClick={() => unFollow(user.id)}
-                    >Unfollowed</button> :
-
+                    >Unfollow</button>
+                    :
                     <button disabled={followingInProgress.some(id => id === user.id)}
                             onClick={() => follow(user.id)}>Follow</button>}
-
             </div>
         </div>
 
-        <div className={classes.card__status}>
-            <div className={classes.card__name}>
-                <div>{user.name}</div>
-                <div className={classes.card__name_status}>{user.status}</div>
-            </div>
-            <div className={classes.card__location}>
-                <div className={classes.card__location_country}>u.location.country</div>
-                <div>u.location.city</div>
+        <div className={styles.bodyCard}>
+            <div className={styles.cardNameStatus}>
+                <h3>{user.name}</h3>
+                {user.status ?
+                    <div className={styles.status}>{user.status}</div>
+                    :
+                    <div className={styles.noStatus}><i>Here will be status</i></div>
+                }
             </div>
         </div>
-    </>;
+    </div>;
 }
 

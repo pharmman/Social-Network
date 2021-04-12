@@ -1,7 +1,7 @@
 import React from 'react';
 import {Dialog} from './Dialog/Dialog';
 import {Message} from './Message/Message';
-import classes from './Dialogs.module.css'
+import styles from './Dialogs.module.css'
 import {DialogsPropsType} from './DialogsContainer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLength, required} from '../../validators/validators';
@@ -25,12 +25,12 @@ export function Dialogs(props: DialogsPropsType) {
 
     const sendNewMessage = (value:FormDataType) => {
         props.onClickSendMessageHandler(value.message)
-        alert(value.message)
     }
 
-    return (
-        <div className={classes.dialogs}>
-            <div>
+    return (<>
+            <h2 className={styles.title}>In progress</h2>
+        <div>
+            <div className={styles.dialogsContainer}>
                 {dialogs}
             </div>
             <div>
@@ -38,6 +38,7 @@ export function Dialogs(props: DialogsPropsType) {
                 <DialogFormMessage onSubmit={sendNewMessage}/>
             </div>
         </div>
+        </>
     )
 }
 

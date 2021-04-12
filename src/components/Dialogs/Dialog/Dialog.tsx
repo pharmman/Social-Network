@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Dialog.module.css';
+import styles from './Dialog.module.css';
 import {NavLink} from 'react-router-dom';
 
 
@@ -10,8 +10,8 @@ type DialogPropsType = {
 
 export function Dialog(props: DialogPropsType) {
     return (
-        <div className={classes.dialogName}>
-            <NavLink className={classes.name} to={`/dialogs/${props.id}`}>{props.name}</NavLink>
+        <div className={styles.dialogName}>
+            <NavLink className={styles.name} to={`/dialogs/${props.id}`}>{props.name}</NavLink>
         </div>
     )
 }

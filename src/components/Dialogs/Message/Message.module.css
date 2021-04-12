@@ -1,10 +1,8 @@
 .speechBubble {
-    padding:10px 40px;
-    margin:1em 0 3em;
-    color:#000;
-    border-color: black;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
 }
 

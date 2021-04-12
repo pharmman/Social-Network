@@ -6,7 +6,8 @@ import {required} from '../../../../../validators/validators';
 import {Contact} from '../Contact/Contact';
 import styles from './ProfileInfoForm.module.scss'
 import {AboutMeItemForm} from '../AboutMeItemForm/AboutMeItemForm';
-import {faBrain, faBriefcase, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faBrain, faBriefcase, faPen, faSave, faUser} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 type ProfileInfoFormType = {
     accordionMode: boolean
@@ -33,7 +34,10 @@ const ProfileInfoForm: React.FC<InjectedFormProps<ProfileType,
         <section>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <h4 className={styles.title}>About <button>Save</button></h4>
+                    <h4 className={styles.title}>
+                        <span>About</span>
+                        <label className={styles.labelSaveButton} htmlFor="saveData"><FontAwesomeIcon icon={faSave} size={'sm'}/></label>
+                        <button id={'saveData'} className={styles.saveButton}>Save</button></h4>
                 </div>
                 {error && <div className={styles.commonError}>
                     {error}

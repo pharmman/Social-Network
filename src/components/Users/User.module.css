@@ -1,14 +1,11 @@
-.users__btn {
-    height: 100vh;
-    width: 100%;
+.wrapper {
     display: flex;
+    max-width: 800px;
     justify-content: space-around;
-    align-items: center;
-}
-
-.users__btn button {
-    height: 100px;
-    width: 300px;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .avatar {
@@ -20,16 +17,9 @@
     text-align: center;
 }
 
-.wrapper {
-    display: flex;
-    max-width: 800px;
-    justify-content: space-around;
-    padding: 20px;
-}
-
 .bodyCard {
     font-size: 20px;
-    width: 500px;
+    max-width: 500px;
     display: flex;
     justify-content: space-between;
     background-color: white;
@@ -46,6 +36,11 @@
 
 .status {
     font-size: 1.2em;
+}
+
+.noStatus {
+    font-size: 1.2em;
+    opacity: 0.5;
 }
 
 .card__location {

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Message.module.css';
+import styles from './Message.module.css';
 
 type MessagePropsType = {
     message: string
@@ -7,7 +7,7 @@ type MessagePropsType = {
 
 export function Message(props: MessagePropsType) {
     return (
-        <div className={classes.speechBubble}>
+        <div className={styles.speechBubble}>
             {props.message}
         </div>
     )

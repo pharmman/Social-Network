@@ -12,14 +12,9 @@ type MapDispatchToPropsType = {
     onClickSendMessageHandler: (value:string) => void
 }
 
-type MapStateToPropsType = {
-    dialogs: DialogsDataType[]
-    messages: MessagesDataType[]
-    textForNewMessage: string,
-    isAuth:boolean
-}
+type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => {
+const mapStateToProps = (state: StateType) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
@@ -37,4 +32,3 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>): MapDispatchToProps
 export default compose<React.ComponentType>(withAuthRedirect,
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, mapDispatchToProps)
     )(Dialogs)
-
