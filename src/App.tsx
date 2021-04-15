@@ -6,7 +6,7 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import {connect} from 'react-redux';
 import {getAuthUserData} from './redux/auth-reducer';
-import {StateType} from './redux/redux-store';
+import {StateType} from './redux/store';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
 import {compose} from 'redux';

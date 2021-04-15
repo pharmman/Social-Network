@@ -1,4 +1,5 @@
-import {ActionsType, DialogsPageType} from './store';
+
+export type DialogsReducerActionsType = ReturnType<typeof addNewMessageActionCreator>
 
 const initialState = {
     textForNewMessage: '',
@@ -18,7 +19,9 @@ const initialState = {
     ]
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
+type DialogsStateType = typeof initialState
+
+export const dialogsReducer = (state = initialState, action: DialogsReducerActionsType):DialogsStateType => {
     switch (action.type) {
         case 'DIALOGS/ADD-NEW-MESSAGE':
             return {
@@ -30,10 +33,5 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
             return state
     }
 }
-export type AddNewMessageType = ReturnType<typeof addNewMessageActionCreator>
-export const addNewMessageActionCreator = (value:string) => {
-    return {
-        type: 'DIALOGS/ADD-NEW-MESSAGE',
-        value
-    } as const
-}
+
+export const addNewMessageActionCreator = (value: string) => ({type: 'DIALOGS/ADD-NEW-MESSAGE', value} as const)

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {StateType} from '../../redux/redux-store';
+import {StateType} from '../../redux/store';
 import {Users} from './Users';
 import {follow, requestUsers, setCurrentPage, setTotalUsersCount, unFollow, UserType} from '../../redux/users-reducer';
 import React from 'react';

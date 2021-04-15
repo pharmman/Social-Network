@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header} from './Header';
-import {StateType} from '../../redux/redux-store';
+import {StateType} from '../../redux/store';
 import {logOutTC} from '../../redux/auth-reducer';
 import {connect} from 'react-redux';
 import {getUserProfile} from '../../redux/profile-reducer';

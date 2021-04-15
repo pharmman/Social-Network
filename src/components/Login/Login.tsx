@@ -4,7 +4,7 @@ import {createField, Input} from '../common/formContorols/FormControls';
 import {maxLength, required} from '../../validators/validators';
 import {connect} from 'react-redux';
 import {loginTC, logOutTC} from '../../redux/auth-reducer';
-import {StateType} from '../../redux/redux-store';
+import {StateType} from '../../redux/store';
 import {Redirect} from 'react-router-dom';
 import styles from './../common/formContorols/FormControls.module.css'
 

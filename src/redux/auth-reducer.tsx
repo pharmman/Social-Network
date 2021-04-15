@@ -1,8 +1,7 @@
-import {ActionsType, ThunkType} from './store';
 import {authAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
 import {Dispatch} from 'redux';
-
+import {ThunkType} from "./store";
 
 export type AuthDataType = {
     id: number | null
@@ -11,8 +10,8 @@ export type AuthDataType = {
     isAuth: boolean,
     captchaUrl: string
 }
+export type AuthReducerActionsType = ReturnType<typeof setAuthData> | ReturnType<typeof setCaptchaUrl>
 
-export type SetCaptchaUrlType = ReturnType<typeof setCaptchaUrl>
 
 const initialState: AuthDataType = {
     id: null,
@@ -22,7 +21,7 @@ const initialState: AuthDataType = {
     captchaUrl: ''
 }
 
-export const authReducer = (state = initialState, action: ActionsType): AuthDataType => {
+export const authReducer = (state = initialState, action: AuthReducerActionsType): AuthDataType => {
     switch (action.type) {
         case 'AUTH/SET-AUTH-DATA':
         case 'AUTH/SET-CAPTCHA-URL':
@@ -35,12 +34,11 @@ export const authReducer = (state = initialState, action: ActionsType): AuthData
     }
 }
 
-export type SetAuthDataType = ReturnType<typeof setAuthData>
 export const setAuthData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) =>
     ({type: 'AUTH/SET-AUTH-DATA', payload: {id, email, login, isAuth}} as const)
-
 const setCaptchaUrl = (captchaUrl: string) => ({type: 'AUTH/SET-CAPTCHA-URL', payload: {captchaUrl}} as const)
 
+//thunks
 export const getAuthUserData = () => async (dispatch: Dispatch) => {
     const data = await authAPI.authMe()
     if (data.resultCode === 0) {
@@ -48,7 +46,6 @@ export const getAuthUserData = () => async (dispatch: Dispatch) => {
         dispatch(setAuthData(id, email, login, true))
     }
 }
-
 
 export const loginTC = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType =>
     async (dispatch) => {

@@ -1,11 +1,32 @@
-import {ProfilePageType} from './store';
-import {addPostActionCreator, deletePost, profileReducer, setProfileStatus} from './profile-reducer';
+import {
+    addPostAC,
+    ContactsType,
+    deletePostAC,
+    profileReducer, ProfileStateType,
+    ProfileType,
+    setProfileStatusAC
+} from './profile-reducer';
 
-let state:ProfilePageType
+let state:ProfileStateType
+
+const profile:ProfileType = {
+    aboutMe: '',
+    contacts: {
+
+    } as ContactsType,
+    fullName: '',
+    lookingForAJob: false,
+    lookingForAJobDescription: '',
+    photos: {
+        small: '',
+        large: ''
+    },
+    userId: 1
+}
 
 beforeEach(() => {
     state = {
-        profile: null,
+        profile,
         messageForNewPost: '',
         status: '',
         posts: [
@@ -19,7 +40,7 @@ beforeEach(() => {
 
 it('post should be added ', function () {
 
-    const action = addPostActionCreator('It\'s friday')
+    const action = addPostAC('It\'s friday')
     const endState = profileReducer(state, action)
 
     expect(endState.posts.length).toBe(5)
@@ -27,7 +48,7 @@ it('post should be added ', function () {
 
 it('status should be set ', function () {
 
-    const action = setProfileStatus('Avocado')
+    const action = setProfileStatusAC('Avocado')
     const endState = profileReducer(state, action)
 
     expect(endState.status).toBe('Avocado')
@@ -35,7 +56,7 @@ it('status should be set ', function () {
 });
 
 it('correct post should be deleted', function () {
-    const action = deletePost(1)
+    const action = deletePostAC(1)
     const endState = profileReducer(state, action)
 
     expect(endState.posts.length).toBe(3)

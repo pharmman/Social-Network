@@ -7,7 +7,7 @@ import {
     updateProfilePhoto,
     updateProfileStatus
 } from '../../redux/profile-reducer';
-import {StateType} from '../../redux/redux-store';
+import {StateType} from '../../redux/store';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import {RouteComponentProps} from 'react-router'

@@ -1,12 +1,11 @@
-import {ThunkType} from './store';
 import {getAuthUserData} from './auth-reducer';
+import {ThunkType} from "./store";
 
-export type AppDataType = {
-    initialization: boolean
-}
+type AppDataType = typeof initialState
 export type AppReducerActionsType = SetInitializationType
 type SetInitializationType = ReturnType<typeof setInitialization>
-const initialState: AppDataType = {
+
+const initialState = {
     initialization: false,
 }
 
