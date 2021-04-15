@@ -99,9 +99,9 @@ export const requestUsers = (currentPage: number, pageSize: number): ThunkType =
     dispatch(changeFetchingStatus(true))
     const data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(setCurrentPage(currentPage))
-    dispatch(changeFetchingStatus(false))
     dispatch(setTotalUsersCount(+data.totalCount))
     dispatch(setUsers(data.items))
+    dispatch(changeFetchingStatus(false))
 }
 
 const followUnfollowFlow = async (

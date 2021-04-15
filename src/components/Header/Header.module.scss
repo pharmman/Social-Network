@@ -68,13 +68,14 @@
         width: 310px;
         padding: 8px;
         margin: 5px;
-        top: 48px;
+        top: 46px;
         right: -44px;
         animation-duration: 200ms;
         z-index: 999;
         border-radius: 8px;
         -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 10px 25px -5px, rgba(0, 0, 0, 0.04) 0px 13px 10px -5px;
         box-shadow: rgba(0, 0, 0, 0.1) 0 10px 25px -5px, rgba(0, 0, 0, 0.04) 0px 13px 10px -5px;
+        background-color: white;
 
         .profileMenuAvatar {
           width: 45px;

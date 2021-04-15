@@ -23,10 +23,12 @@ export const Users = (props: UsersPropsType) => {
         props.onPageChanged(p)
     }
 
+    if (props.isFetching) {
+        return <Preloader/>
+    }
+
     return <>
-        {props.isFetching && <Preloader/>
-        }
-        {props.users.map(u => <div key={u.id}>
+        {props.users.map(u => <div className={styles.wrapper} key={u.id}>
                 <>
                     <User user={u} unFollow={props.unFollow} follow={props.follow}
                           followingInProgress={props.followingInProgress}/>
