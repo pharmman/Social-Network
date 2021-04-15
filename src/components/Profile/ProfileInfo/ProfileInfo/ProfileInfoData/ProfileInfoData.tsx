@@ -2,7 +2,7 @@ import {Contact} from '../Contact/Contact';
 import {ContactsType, ProfileType} from '../../../../../redux/profile-reducer';
 import styles from './PorfileInfoData.module.scss'
 import React from 'react';
-import {faBrain, faBriefcase, faPen, faSignOutAlt, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faBrain, faBriefcase, faPen, faUser} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {AboutMeItem} from '../AboutMeItem/AboutMeItem';
 

@@ -3,7 +3,8 @@ import {Profile} from './Profile';
 import {
     getProfileStatus,
     getUserProfile,
-    ProfileType, updateProfile,
+    ProfileType,
+    updateProfile,
     updateProfilePhoto,
     updateProfileStatus
 } from '../../redux/profile-reducer';
@@ -12,7 +13,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import {RouteComponentProps} from 'react-router'
 import {compose} from 'redux';
-import {Preloader} from '../common/Preloader/Preloader';
 
 type PathParamsType = {
     userId: string

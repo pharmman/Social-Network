@@ -1,5 +1,4 @@
 import React from 'react';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ProfileType} from '../../redux/profile-reducer';
 
@@ -21,7 +20,6 @@ export function Profile(props: ProfilePropsType) {
                 updateProfile={props.updateProfile}
                 updateProfilePhoto={props.updateProfilePhoto}
                 updateProfileStatus={props.updateProfileStatus}/>
-            {/*<MyPostsContainer/>*/}
         </>
     )
 }

@@ -3,7 +3,7 @@ import React, {FC} from 'react';
 import styles from './FormControls.module.css'
 
 export const FormControl: React.FC<WrappedFieldProps> = (props) => {
-    const {input, meta, ...restProps} = props
+    const {meta} = props
     const hasError = meta.touched && meta.error
 
     return (

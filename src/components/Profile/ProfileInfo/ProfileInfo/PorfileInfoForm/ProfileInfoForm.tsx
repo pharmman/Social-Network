@@ -6,7 +6,7 @@ import {required} from '../../../../../validators/validators';
 import {Contact} from '../Contact/Contact';
 import styles from './ProfileInfoForm.module.scss'
 import {AboutMeItemForm} from '../AboutMeItemForm/AboutMeItemForm';
-import {faBrain, faBriefcase, faPen, faSave, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faBrain, faBriefcase, faSave, faUser} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 type ProfileInfoFormType = {
