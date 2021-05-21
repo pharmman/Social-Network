@@ -53,7 +53,7 @@ export function Header(props: HeaderPropsType) {
                                 <div className={menuIsShowing ? styles.profileMenuShow : styles.profileMenuHidden}>
                                     <div className={styles.profileMenuAvatar}>
                                         <NavLink to={`/profile/:${props.authorizedUserId}?`}>
-                                            <img className={styles.profileMenuImg} src={props.profilePhoto}
+                                            <img className={styles.profileMenuImg} src={props.profilePhoto || userAvatar}
                                                  alt={'Profile'}/>
                                         </NavLink>
                                     </div>
