@@ -6,6 +6,7 @@ import logo from '../../assets/images/logo.png'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 import ClickAwayListener from 'react-click-away-listener';
+import userAvatar from '../../assets/images/userAvatar.jpg'
 
 type HeaderPropsType = HeaderContainerPropsType
 
@@ -46,7 +47,7 @@ export function Header(props: HeaderPropsType) {
                         </div>
                         <ClickAwayListener onClickAway={handleClickAway}>
                             <div className={styles.profileImgContainer}>
-                                <img onClick={menuHandler} className={styles.profileImg} src={props.profilePhoto}
+                                <img onClick={menuHandler} className={styles.profileImg} src={props.profilePhoto || userAvatar}
                                      alt={'Profile'}/>
 
                                 <div className={menuIsShowing ? styles.profileMenuShow : styles.profileMenuHidden}>
