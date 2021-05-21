@@ -4,7 +4,7 @@ import {HeaderContainerPropsType} from './HeaderContainer';
 import {NavLink} from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faBars, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 import ClickAwayListener from 'react-click-away-listener';
 
 type HeaderPropsType = HeaderContainerPropsType
@@ -39,7 +39,7 @@ export function Header(props: HeaderPropsType) {
             <div className={styles.rightSide}>
 
                 {props.isAuth
-                    ?
+                    &&
                     <div className={styles.loginMenu}>
                         <div className={styles.loginButton}>
                             <FontAwesomeIcon onClick={logOut} icon={faSignOutAlt} size={'lg'}/>
@@ -62,10 +62,6 @@ export function Header(props: HeaderPropsType) {
                                 </div>
                             </div>
                         </ClickAwayListener>
-                    </div>
-                    :
-                    <div className={styles.loginButton}>
-                        <NavLink to={'/login'}><FontAwesomeIcon icon={faSignInAlt} size={'lg'}/></NavLink>
                     </div>
                 }
             </div>

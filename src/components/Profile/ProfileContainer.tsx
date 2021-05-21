@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import {RouteComponentProps} from 'react-router'
 import {compose} from 'redux';
+import {withAuthRedirect} from "../../hoc/AuthRedirect";
 
 type PathParamsType = {
     userId: string
@@ -89,7 +90,7 @@ const mapStateToProps = (state: StateType) => {
 }
 
 export default compose<React.ComponentType>(
-    // withAuthRedirect,
+    withAuthRedirect,
     withRouter,
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
         getUserProfile,
