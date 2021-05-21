@@ -53,6 +53,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, { captchaUrl: string }
     console.log(props.error)
     return (
         <form onSubmit={props.handleSubmit}>
+            <p className={styles.text}>To log in get registered
+                <a href={'https://social-network.samuraijs.com/'}
+                   target={'_blank'} rel={'noopener noreferrer'}> here
+                </a>
+            </p>
+            <p className={styles.text}>or use common test account credentials:</p>
+            <p className={styles.text}>Email: free@samuraijs.com</p>
+            <p className={styles.text}>Password: free</p>
             {createField('Email', 'email', Input, 'email', [maxLength30, required])}
             {createField('Password', 'password', Input, 'password', [maxLength30, required])}
             {createField(null, 'RememberMe', Input, 'checkbox', [], ' Remember me')}
